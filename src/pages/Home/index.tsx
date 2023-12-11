@@ -5,6 +5,7 @@ import {
     ContainerHeader,
     ContainerImage,
     ContainerTextImage,
+    ExtendedArea,
     Image,
     ButtonLogout,
     OlaText,
@@ -18,7 +19,6 @@ export function Home() {
     return (
         <Container>
             <Header>
-
                 <ContainerHeader>
                     <ContainerImage>
                         <Image
@@ -39,10 +39,12 @@ export function Home() {
                     </ButtonLogout>
                 </ContainerHeader>
 
+                <ExtendedArea>
+                <HighlightCard />
+                <HighlightCard />
+                <HighlightCard />
+                </ExtendedArea>
             </Header>
-            <HighlightCard />
-
-
         </Container >
     )
 }

@@ -16,17 +16,25 @@ background-color: ${theme.colors.purple[100]};
 padding: 40px 80px;
 
 display: flex;
-align-items: start;
-justify-content: space-between;
+flex-direction: column;
+gap: 50px;
+
+overflow: visible;
 
 `
 
-export const ContainerHeader = styled.div`
+export const ExtendedArea = styled.div`
+flex: 1; 
+display: flex;
+justify-content: center;
+padding: .5rem 5rem;
 
+`;
+
+export const ContainerHeader = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
-width: 100vw;
 `
 
 export const ContainerImage = styled.div`
@@ -50,6 +58,14 @@ width: 70px;
 height: 77px;
 object-fit: cover;
 border-radius: 10px;
+`
+
+export const ContainerCards = styled.div`
+
+height: 15vh;
+width: 100vw;
+background-color: ${theme.colors.orange[100]};
+
 `
 
 export const ButtonLogout = styled.button`

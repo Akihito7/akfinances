@@ -14,9 +14,15 @@ padding: 15px 30px;
 display: flex;
 flex-direction: column;
 justify-content: space-around;
+margin-left: 30px;
 
-position: absolute;
+transition: all 300ms;
 
+
+&:hover {
+ transform: scale(1.1);
+ cursor: pointer;
+}
 `
 export const Header = styled.div`
 
@@ -31,6 +37,7 @@ font-size: 2rem;
 font-weight: 400;
 color: ${theme.colors.blue[100]};
 `
+
 export const Icon = styled.img`
 
 width: 40px;
