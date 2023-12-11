@@ -40,9 +40,26 @@ export function Home() {
                 </ContainerHeader>
 
                 <ExtendedArea>
-                <HighlightCard />
-                <HighlightCard />
-                <HighlightCard />
+                    <HighlightCard
+                        title="Entradas"
+                        type="up"
+                        amount="17.400"
+                        lastTransaction="Última entrada dia 13 de abril"
+                    />
+
+                    <HighlightCard
+                        title="Saídas"
+                        type="down"
+                        amount="1.259"
+                        lastTransaction="Última saída dia 03 de abril"
+                    />
+
+                    <HighlightCard
+                        title="Total"
+                        type="total"
+                        amount="16.141"
+                        lastTransaction="01 à 16 de abril"
+                    />
                 </ExtendedArea>
             </Header>
         </Container >

@@ -1,13 +1,19 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 
+interface TypeProps {
+    type: 'up' | 'down' | 'total';
+    theme: typeof theme;
 
-export const Container = styled.div`
+};
+
+
+export const Container = styled.div<TypeProps>`
 
 width: 33.2rem;
 height: 16rem;
 
-background-color: white;
+background-color: ${({ type }) => (type === 'total' ? theme.colors.orange[100] : theme.colors.white[100])};
 border-radius: 5px;
 padding: 15px 30px;
 
@@ -31,11 +37,11 @@ align-items: start;
 justify-content: space-between;
 `
 
-export const Title = styled.h1`
+export const Title = styled.h1<TypeProps>`
 font-family: 'Poppins', sans-serif;
 font-size: 2rem;
 font-weight: 400;
-color: ${theme.colors.blue[100]};
+color : ${({ type }) => (type === 'total' ? theme.colors.white[100] : theme.colors.blue[100])};
 `
 
 export const Icon = styled.img`
@@ -48,26 +54,27 @@ display: flex;
 flex-direction: column;
 
 `
-export const Span = styled.span`
+export const Span = styled.span<TypeProps>`
 font-family: 'Poppins', sans-serif;
 font-size: 3rem;
 font-weight: 400;
-color: ${theme.colors.blue[100]};
+
+color : ${({ type }) => (type === 'total' ? theme.colors.white[100] : theme.colors.blue[100])}
 `
 
 
-export const Amount = styled.h1`
+export const Amount = styled.h1<TypeProps>`
 font-family: 'Poppins', sans-serif;
 font-size: 3rem;
 font-weight: 600;
-color: ${theme.colors.blue[100]};
+color : ${({ type }) => (type === 'total' ? theme.colors.white[100] : theme.colors.blue[100])};
 line-height: 1;
 
 `
-export const LastTransaction = styled.p`
+export const LastTransaction = styled.p<TypeProps>`
 font-family: 'Poppins', sans-serif;
 font-size: 1.2;
 font-weight: 400;
-color: ${theme.colors.grey[100]};
+color : ${({ type }) => (type === 'total' ? theme.colors.white[100] : theme.colors.blue[100])};
 line-height: 1;
 `

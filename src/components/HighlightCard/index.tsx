@@ -9,17 +9,34 @@ import {
     LastTransaction
 } from './style'
 
+interface HighLightProps {
+    title: string;
+    type: 'up' | 'down' | 'total';
+    amount: string;
+    lastTransaction: string;
+};
 
-export function HighlightCard() {
+const iconTypes = {
+    up: "Entradas.svg",
+    down: "Saidas.svg",
+    total: "Total.svg"
+}
+
+
+
+export function HighlightCard({ title, type, amount, lastTransaction }: HighLightProps) {
     return (
-        <Container>
+        <Container type={type}>
             <Header>
-                <Title>Entradas</Title>
-                <Icon src='Entradas.svg'></Icon>
+                <Title type={type}>{title}</Title>
+                <Icon
+                    src={iconTypes[type]}
+                    alt='icone da transação'
+                />
             </Header>
             <Footer>
-                <Amount><Span>R$</Span> 17.400,<Span>00</Span></Amount>
-                <LastTransaction>Última entrada dia 13 de abril</LastTransaction>
+                <Amount type={type}><Span type={type}>R$</Span> {amount},<Span type={type}>00</Span></Amount>
+                <LastTransaction type={type}>{lastTransaction}</LastTransaction>
             </Footer>
         </Container>
     )
