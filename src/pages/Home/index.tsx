@@ -1,3 +1,4 @@
+import { HighlightCard } from "../../components/HighlightCard"
 import {
     Container,
     Header,
@@ -39,6 +40,8 @@ export function Home() {
                 </ContainerHeader>
 
             </Header>
+            <HighlightCard />
+
 
         </Container >
     )
