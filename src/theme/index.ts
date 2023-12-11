@@ -1,8 +1,4 @@
 export const theme = {
-    fonts: {
-        poppins: "font-family: 'Poppins', sans-serif;"
-    },
-
     colors: {
         white: {
             100: "#FFFFFF",
