@@ -1,4 +1,5 @@
 import { HighlightCard } from "../../components/HighlightCard"
+import { TransactionCard } from "../../components/TransactionCard"
 import {
     Container,
     Header,
@@ -6,6 +7,7 @@ import {
     ContainerImage,
     ContainerTextImage,
     ExtendedArea,
+    ContainerTransactions,
     Image,
     ButtonLogout,
     OlaText,
@@ -62,6 +64,12 @@ export function Home() {
                     />
                 </ExtendedArea>
             </Header>
+
+            <ContainerTransactions>
+
+            </ContainerTransactions>
+
+            <TransactionCard></TransactionCard>
         </Container >
     )
 }

@@ -31,6 +31,11 @@ padding: .5rem 5rem;
 
 `;
 
+export const ContainerTransactions = styled.div`
+
+margin-top: 20rem;
+`
+
 export const ContainerHeader = styled.div`
 display: flex;
 align-items: center;
@@ -72,11 +77,13 @@ export const ButtonLogout = styled.button`
 background: none;
 border: none;
 display: flex;
+transition: all 300ms;
 
 
-:hover{
+&:hover{
     opacity: .5;
     cursor: pointer;
+    transform: scale(1.1);
 }
 `
 
