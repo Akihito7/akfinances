@@ -3,6 +3,7 @@ export const theme = {
         white: {
             100: "#FFFFFF",
             200: "#E5E5E5",
+            300 : "#EBEBEB"
         },
 
         grey : {

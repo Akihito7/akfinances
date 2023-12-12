@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom/client'
 
 import { Home } from './pages/Home'
 import './index.css'
+import { Register } from './pages/Register'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Home />
+    <Register />
   </React.StrictMode>,
 )
