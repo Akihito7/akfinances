@@ -2,12 +2,12 @@ import styled from "styled-components"
 import { theme } from "../../theme"
 
 export const Container = styled.div`
-
-width: 28rem;
-height: 12.8rem;
+width: 24rem;
+height: 12rem;
 background-color: ${theme.colors.white[100]};
 border-radius: 5px;
 padding: 17px 20px;
+margin-right:  1.7rem;
 
 display: flex;
 flex-direction: column;
@@ -41,14 +41,15 @@ export const Footer = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
-
+gap : 1rem;
 `
 
 export const ContainerIcon = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
-gap: 10px;
+gap: 2px;
+
 `
 export const Icon = styled.img`
 width: 20px;

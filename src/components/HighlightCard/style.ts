@@ -10,8 +10,8 @@ interface TypeProps {
 
 export const Container = styled.div<TypeProps>`
 
-width: 33.2rem;
-height: 16rem;
+width: 28rem;
+height: 14rem;
 
 background-color: ${({ type }) => (type === 'total' ? theme.colors.orange[100] : theme.colors.white[100])};
 border-radius: 5px;

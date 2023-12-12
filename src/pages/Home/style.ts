@@ -6,6 +6,7 @@ export const Container = styled.div`
 height: 100vh;
 width: 100vw;
 background-color: ${theme.colors.white[200]};
+overflow: hidden;
 
 `
 export const Header = styled.div`
@@ -13,7 +14,7 @@ export const Header = styled.div`
 height: 35vh;
 width: 100vw;
 background-color: ${theme.colors.purple[100]};
-padding: 40px 80px;
+padding: 4rem 8rem;
 
 display: flex;
 flex-direction: column;
@@ -31,9 +32,44 @@ padding: .5rem 5rem;
 
 `;
 
-export const ContainerTransactions = styled.div`
+export const TransactionList = styled.p`
+margin-top: 13rem;
+margin-bottom: 2rem;
+padding: 0 8rem;
 
-margin-top: 20rem;
+font-family: 'Poppins', sans-serif;
+font-size: 2em;
+font-weight: 400;
+color: ${theme.colors.blue[100]};
+`
+
+export const ContainerTransactions = styled.div`
+display: flex;
+padding: 0 8rem;
+overflow: auto;
+padding-bottom: 3rem;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 1.5rem;
+    
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${theme.colors.white[200]}; 
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${theme.colors.purple[100]}; 
+    border-radius: 99px;
+
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: ${theme.colors.purple[100]}; 
+  }
+
+
 `
 
 export const ContainerHeader = styled.div`

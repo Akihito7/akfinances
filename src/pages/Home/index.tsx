@@ -1,4 +1,5 @@
 import { HighlightCard } from "../../components/HighlightCard"
+import { Menu } from "../../components/Menu"
 import { TransactionCard } from "../../components/TransactionCard"
 import {
     Container,
@@ -7,6 +8,7 @@ import {
     ContainerImage,
     ContainerTextImage,
     ExtendedArea,
+    TransactionList,
     ContainerTransactions,
     Image,
     ButtonLogout,
@@ -16,6 +18,8 @@ import {
     ImageLogout,
 
 } from "./style"
+
+const LISTA = [1,2,3,4,5,6,7,8,9,10,11]
 
 export function Home() {
     return (
@@ -65,11 +69,19 @@ export function Home() {
                 </ExtendedArea>
             </Header>
 
+            <TransactionList>Lista de transações</TransactionList>
+
             <ContainerTransactions>
 
+                {
+                    LISTA.map(() => (
+                        <TransactionCard />
+                    ))
+                }
             </ContainerTransactions>
 
-            <TransactionCard></TransactionCard>
+            <Menu></Menu>
+
         </Container >
     )
 }
