@@ -7,7 +7,6 @@ height: 12rem;
 background-color: ${theme.colors.white[100]};
 border-radius: 5px;
 padding: 17px 20px;
-margin-right:  1.7rem;
 
 display: flex;
 flex-direction: column;

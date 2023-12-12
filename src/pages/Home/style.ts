@@ -18,7 +18,7 @@ padding: 4rem 8rem;
 
 display: flex;
 flex-direction: column;
-gap: 50px;
+gap: 3rem;
 
 overflow: visible;
 
@@ -33,8 +33,8 @@ padding: .5rem 5rem;
 `;
 
 export const TransactionList = styled.p`
-margin-top: 13rem;
-margin-bottom: 2rem;
+margin-top: 10rem;
+margin-bottom: .5rem;
 padding: 0 8rem;
 
 font-family: 'Poppins', sans-serif;
@@ -45,28 +45,34 @@ color: ${theme.colors.blue[100]};
 
 export const ContainerTransactions = styled.div`
 display: flex;
-padding: 0 8rem;
+align-items: center;
+padding: 1rem 2rem 0;
+gap: 1.7rem;
+margin: 0 6rem;
 overflow: auto;
 padding-bottom: 3rem;
 
   &::-webkit-scrollbar {
-    width: 5px;
     height: 1.5rem;
-    
   }
 
   &::-webkit-scrollbar-track {
     background: ${theme.colors.white[200]}; 
+    margin-left: 2rem;
+    margin-right: 2rem;
+
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: ${theme.colors.purple[100]}; 
     border-radius: 99px;
+  
 
   }
 
   &::-webkit-scrollbar-thumb:hover {
     background-color: ${theme.colors.purple[100]}; 
+  
   }
 
 
@@ -80,7 +86,7 @@ justify-content: space-between;
 
 export const ContainerImage = styled.div`
 
-width: 150px;
+width: 15rem;
 display: flex;
 gap: 20px;
 
@@ -95,8 +101,8 @@ justify-content: flex-end;
 `
 export const Image = styled.img`
 
-width: 70px;
-height: 77px;
+width: 6rem;
+height: 6rem;
 object-fit: cover;
 border-radius: 10px;
 `

@@ -11,7 +11,7 @@ padding: 0 4rem;
 background-color: ${theme.colors.white[100]};
 
 position: absolute;
-top : 90%;
+top : 88%;
 left: 50%;
 transform: translateX(-50%);
 
@@ -25,6 +25,12 @@ export const ContainerIcon = styled.div`
 
 display: flex;
 gap: 1rem;
+transition : all 300ms;
+
+&:hover{
+    transform: scale(1.1);
+    cursor : pointer;
+}
 
 `
 
