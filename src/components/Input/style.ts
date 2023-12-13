@@ -21,4 +21,8 @@ font-size: 1.6rem;
     outline: none;
 }
 
+&::placeholder{
+    color: ${theme.colors.grey[100]};
+}
+
 `

@@ -23,8 +23,8 @@ export function Register() {
 
     const [categoryOpen, setCategoryOpen] = useState(false);
 
-    function handleCategoryOpen(){
-        if(categoryOpen) setCategoryOpen(false)
+    function handleCategoryOpen() {
+        if (categoryOpen) setCategoryOpen(false)
         else setCategoryOpen(true)
     };
 
@@ -88,6 +88,8 @@ export function Register() {
                                 </ButtonOfCategory>
                             </ContainerButtonsCategory>
                         </ContainerCategory>
+
+                        <ButtonSend>Salvar</ButtonSend>
 
 
                     </ContainerForm>

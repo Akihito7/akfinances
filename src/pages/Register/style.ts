@@ -174,7 +174,27 @@ height: 2.8rem;
 `
 
 
-export const ButtonSend = styled.div`
+export const ButtonSend = styled.button`
 
+width: 100%;
+height: 5rem;
+background-color: ${theme.colors.orange[100]};
+border-radius: 5px;
+border: none;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+font-family: 'Poppins', sans-serif;
+font-size: 1.6rem;
+color: ${theme.colors.white[100]};
+
+transition : all 300ms;
+
+&:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
 
 `
