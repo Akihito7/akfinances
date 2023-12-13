@@ -5,7 +5,11 @@ import {
     ContainerButtons,
     ButtonTypeTransaction,
     ButtonIcon,
-    InputCategory,
+    ContainerCategory,
+    ContainerButtonsCategory,
+    ButtonOfCategory,
+    IconCategory,
+    ButtonSelect,
     ButtonSend,
     Header,
     ExtendedArea,
@@ -44,6 +48,17 @@ export function Register() {
                                 Income
                             </ButtonTypeTransaction>
                         </ContainerButtons>
+
+                        <ContainerCategory>
+                            <ButtonSelect>Categoria</ButtonSelect>
+                            <ContainerButtonsCategory>
+                                <ButtonOfCategory>
+                                    <IconCategory src='coffee.svg' />
+                                    Alimentação
+                                </ButtonOfCategory>
+
+                            </ContainerButtonsCategory>
+                        </ContainerCategory>
 
 
                     </ContainerForm>

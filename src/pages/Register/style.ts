@@ -8,6 +8,10 @@ height: 100vh;
 background-color: ${theme.colors.white[200]};
 overflow: hidden;
 
+.hidden {
+    display: none;
+}
+
 `
 
 export const Header = styled.div`
@@ -98,10 +102,68 @@ width: 3rem;
 height: 3rem;
 
 `
-export const InputCategory = styled.div`
 
+export const ContainerCategory = styled.div`
+
+width: 100%;
+height: auto;
+
+display: flex;
+flex-direction: column;
+`
+export const ButtonSelect = styled.button`
+
+width: 100%;
+height: 5rem;
+border: none;
+border-radius: 5px;
+background-color: ${theme.colors.white[300]};
+padding: 0 2rem;
+font-family: 'Poppins', sans-serif;
+font-size: 1.6rem;
+color: ${theme.colors.grey[100]};
+
+display: flex;
+align-items: center;
+justify-content: start;
+
+&:hover{
+    cursor: pointer;
+}
 
 `
+
+export const ContainerButtonsCategory = styled.div`
+
+margin-top: 1rem;
+`
+
+export const ButtonOfCategory = styled.button`
+
+width: 100%;
+height: 4rem;
+padding : 0 2rem;
+background-color: ${theme.colors.white[300]};
+border: none;
+border-radius: 5px;
+
+display: flex;
+align-items: center;
+gap: 1rem;
+
+font-family: 'Poppins', sans-serif;
+font-size: 1.6rem;
+color: ${theme.colors.grey[100]};
+`
+
+export const IconCategory = styled.img`
+
+width: 2.8rem;
+height: 2.8rem;
+
+`
+
+
 export const ButtonSend = styled.div`
 
 
