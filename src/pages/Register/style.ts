@@ -6,7 +6,7 @@ export const Container = styled.div`
 width: 100vw;
 height: 100vh;
 background-color: ${theme.colors.white[200]};
-overflow: hidden;
+overflow-x: hidden;
 
 .hidden {
     display: none;
@@ -42,7 +42,6 @@ margin-top: 7rem;
 
 export const ContainerForm = styled.div`
 
-height: 85vh;
 width: 50rem;
 background-color: ${theme.colors.white[100]};
 border-radius: 10px;
@@ -110,6 +109,7 @@ height: auto;
 
 display: flex;
 flex-direction: column;
+
 `
 export const ButtonSelect = styled.button`
 
@@ -135,7 +135,10 @@ justify-content: start;
 
 export const ContainerButtonsCategory = styled.div`
 
-margin-top: 1rem;
+padding: 2rem 0 0;
+border-radius: 0 0 5px 5px;
+background-color: ${theme.colors.grey[100]};
+
 `
 
 export const ButtonOfCategory = styled.button`
@@ -145,7 +148,8 @@ height: 4rem;
 padding : 0 2rem;
 background-color: ${theme.colors.white[300]};
 border: none;
-border-radius: 5px;
+
+border-bottom: 1px solid ${theme.colors.purple[100]};
 
 display: flex;
 align-items: center;
@@ -154,6 +158,13 @@ gap: 1rem;
 font-family: 'Poppins', sans-serif;
 font-size: 1.6rem;
 color: ${theme.colors.grey[100]};
+
+transition: all 300ms;
+
+&:hover{
+  opacity: .7;
+  cursor: pointer;
+}
 `
 
 export const IconCategory = styled.img`

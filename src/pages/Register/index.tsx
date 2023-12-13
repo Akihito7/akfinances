@@ -56,7 +56,22 @@ export function Register() {
                                     <IconCategory src='coffee.svg' />
                                     Alimentação
                                 </ButtonOfCategory>
-
+                                <ButtonOfCategory>
+                                    <IconCategory src='shopping-bag.svg' />
+                                    Compras
+                                </ButtonOfCategory>
+                                <ButtonOfCategory>
+                                    <IconCategory src='dollar-sign.svg' />
+                                    Salário
+                                </ButtonOfCategory>
+                                <ButtonOfCategory>
+                                    <IconCategory src='smile.svg' />
+                                    Diversão
+                                </ButtonOfCategory>
+                                <ButtonOfCategory>
+                                    <IconCategory src='book.svg' />
+                                    Estudos
+                                </ButtonOfCategory>
                             </ContainerButtonsCategory>
                         </ContainerCategory>
 
