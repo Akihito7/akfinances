@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
     Container,
     ContainerForm,
@@ -18,6 +20,14 @@ import {
 import { Input } from '../../components/Input'
 
 export function Register() {
+
+    const [categoryOpen, setCategoryOpen] = useState(false);
+
+    function handleCategoryOpen(){
+        if(categoryOpen) setCategoryOpen(false)
+        else setCategoryOpen(true)
+    };
+
     return (
         <Container>
 
@@ -50,8 +60,12 @@ export function Register() {
                         </ContainerButtons>
 
                         <ContainerCategory>
-                            <ButtonSelect>Categoria</ButtonSelect>
-                            <ContainerButtonsCategory>
+                            <ButtonSelect onClick={handleCategoryOpen}>
+                                Categoria
+                            </ButtonSelect>
+                            <ContainerButtonsCategory
+                                className={categoryOpen ? '' : 'hidden'}
+                            >
                                 <ButtonOfCategory>
                                     <IconCategory src='coffee.svg' />
                                     Alimentação

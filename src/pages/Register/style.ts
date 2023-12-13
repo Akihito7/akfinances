@@ -135,9 +135,7 @@ justify-content: start;
 
 export const ContainerButtonsCategory = styled.div`
 
-padding: 2rem 0 0;
-border-radius: 0 0 5px 5px;
-background-color: ${theme.colors.grey[100]};
+padding: 1rem 0 0;
 
 `
 
@@ -145,6 +143,7 @@ export const ButtonOfCategory = styled.button`
 
 width: 100%;
 height: 4rem;
+border-radius: 5px;
 padding : 0 2rem;
 background-color: ${theme.colors.white[300]};
 border: none;
