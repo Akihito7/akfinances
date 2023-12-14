@@ -28,6 +28,15 @@ export const theme = {
 
         orange: {
             100: "#FF872C"
+        },
+
+        categories : {
+            purchases : "#5636D3",
+            food : "#FF872C",
+            salary : "#12A454",
+            car : "#E83F5B",
+            leisure : "#26195C",
+            studies : "#9C001A"
         }
 
     }

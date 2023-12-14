@@ -10,17 +10,22 @@ import {
     NameText,
     ButtonLogout,
     ImageLogout,
+    Main,
     PizzaGraphic,
-
+    ContainerCategories,
+    CardCategory,
+    TitleCategory,
+    AmountCategory,
+    SpanCategory,
 } from './style'
 
 import { VictoryPie } from 'victory';
 
 const CATEGORIES = [
-    { x: 3, y: 6, label: "15%", color: "green" },
-    { x: 3, y: 6, label: "15%", color: "pink" },
-    { x: 2, y: 8, label: "20%", color: "orange" },
-    { x: 1, y: 40, label: "50%", color: "purple" },
+    { x: 3, y: 6, label: "15%", color: theme.colors.categories.food },
+    { x: 3, y: 6, label: "15%", color: theme.colors.categories.leisure },
+    { x: 2, y: 8, label: "20%", color: theme.colors.categories.car },
+    { x: 1, y: 40, label: "50%", color: theme.colors.categories.purchases },
 ]
 
 
@@ -50,6 +55,8 @@ export function Resume() {
                 </ContainerHeader>
 
             </Header>
+
+          <Main>
             <PizzaGraphic>
                 <VictoryPie
                     data={CATEGORIES}
@@ -63,13 +70,29 @@ export function Resume() {
                         }
                     }}
 
-
                 />
 
             </PizzaGraphic>
 
-
-
+            <ContainerCategories>
+                <CardCategory category="purchases">
+                    <TitleCategory>Compras</TitleCategory>
+                    <AmountCategory><SpanCategory>R$</SpanCategory>1.200</AmountCategory>
+                </CardCategory>
+                <CardCategory category="car">
+                    <TitleCategory>Carro</TitleCategory>
+                    <AmountCategory><SpanCategory>R$</SpanCategory>7000</AmountCategory>
+                </CardCategory>
+                <CardCategory category="food">
+                    <TitleCategory>Alimentação</TitleCategory>
+                    <AmountCategory><SpanCategory>R$</SpanCategory>500</AmountCategory>
+                </CardCategory>
+                <CardCategory category="leisure">
+                    <TitleCategory>Lazer</TitleCategory>
+                    <AmountCategory><SpanCategory>R$</SpanCategory>500</AmountCategory>
+                </CardCategory>
+            </ContainerCategories>
+            </Main>
 
         </Container>
     )

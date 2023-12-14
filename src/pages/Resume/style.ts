@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 
+type PropsCategory = {
+    "category" : string;
+} 
+
 export const Container = styled.div`
 
 width: 100vw;
@@ -8,6 +12,7 @@ height: 100vh;
 
 display: flex;
 flex-direction: column;
+background-color: ${theme.colors.white[200]};
 
 `
 
@@ -93,9 +98,70 @@ transition: all 300ms;
 }
 `
 
+export const Main = styled.div`
+display: flex;
+`
+
 export const PizzaGraphic = styled.div`
 
 width: 50vw;
 height: 65vh;
 padding: 1rem;
+`
+
+export const ContainerCategories = styled.div`
+
+width: 50%;
+height: 65vh;
+padding: 1rem 14rem;
+gap: 1rem;
+display: flex;
+flex-direction: column;
+
+justify-content: center;
+
+`
+
+export const CardCategory = styled.div<PropsCategory>`
+
+width: 100%;
+height: 5rem;
+background-color: ${theme.colors.white[100]};
+border-radius: 5px;
+border-left: 6px solid ${({ category }) => (theme.colors.categories[category as keyof typeof theme.colors.categories])};
+
+
+
+padding: 1rem 2.7rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+`
+
+export const TitleCategory = styled.h1`
+
+font-family: 'Poppins', sans-serif;
+font-weight: 400;
+font-size: 1.6rem;
+color: ${theme.colors.blue[100]};
+
+`
+
+export const AmountCategory = styled.p`
+
+font-family: 'Poppins', sans-serif;
+font-weight: bold;
+font-size: 1.6rem;
+color: ${theme.colors.blue[100]};
+
+`
+
+export const SpanCategory = styled.span`
+
+font-family: 'Poppins', sans-serif;
+font-weight: 500;
+font-size: 1.6rem;
+color: ${theme.colors.blue[100]};
+
 `
