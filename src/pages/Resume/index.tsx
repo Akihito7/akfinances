@@ -1,3 +1,4 @@
+import { Menu } from '../../components/Menu';
 import { theme } from '../../theme';
 import {
     Container,
@@ -10,6 +11,7 @@ import {
     NameText,
     ButtonLogout,
     ImageLogout,
+    ResumeByCategory,
     Main,
     PizzaGraphic,
     ContainerCategories,
@@ -54,15 +56,19 @@ export function Resume() {
                     </ButtonLogout>
                 </ContainerHeader>
 
+                <ResumeByCategory>Resumo por categoria</ResumeByCategory>
+
             </Header>
 
           <Main>
             <PizzaGraphic>
                 <VictoryPie
+               
                     data={CATEGORIES}
                     colorScale={CATEGORIES.map(item => item.color)}
                     labelRadius={70}
                     style={{
+                        
                         labels: {
                             fontSize: 18,
                             fontWeight: 'bold',
@@ -93,6 +99,8 @@ export function Resume() {
                 </CardCategory>
             </ContainerCategories>
             </Main>
+
+            <Menu />
 
         </Container>
     )

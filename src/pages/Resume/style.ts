@@ -25,11 +25,14 @@ padding: 4rem 8rem;
 
 display: flex;
 flex-direction: column;
-gap: 3rem;
+align-items: center ;
+gap: 5rem;
 
 `
 
 export const ContainerHeader = styled.div`
+width: 100vw;
+padding: 0 8rem;
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -98,33 +101,43 @@ transition: all 300ms;
 }
 `
 
+export const ResumeByCategory = styled.h1`
+
+font-family: 'Poppins', sans-serif;
+font-weight: 400;
+font-size: 2.8rem;
+color : ${theme.colors.white[100]}
+
+`
 export const Main = styled.div`
 display: flex;
+height: 50vh;
+padding: 0 12rem;
+
 `
 
 export const PizzaGraphic = styled.div`
 
 width: 50vw;
-height: 65vh;
 padding: 1rem;
 `
 
 export const ContainerCategories = styled.div`
 
 width: 50%;
-height: 65vh;
-padding: 1rem 14rem;
 gap: 1rem;
 display: flex;
 flex-direction: column;
-
+align-items: center;
 justify-content: center;
+padding: 1rem;
+
 
 `
 
 export const CardCategory = styled.div<PropsCategory>`
 
-width: 100%;
+width: 34rem;
 height: 5rem;
 background-color: ${theme.colors.white[100]};
 border-radius: 5px;

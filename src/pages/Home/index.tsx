@@ -19,7 +19,7 @@ import {
 
 } from "./style"
 
-const LISTA = [1,2,3,4,5,6,7,8,9,10,11]
+const LISTA = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
 export function Home() {
     return (
@@ -80,8 +80,7 @@ export function Home() {
                 }
             </ContainerTransactions>
 
-            <Menu></Menu>
-
+            <Menu />
         </Container >
     )
 }
