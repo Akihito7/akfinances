@@ -7,6 +7,7 @@ width: 100vw;
 height: 100vh;
 
 display: flex;
+flex-direction: column;
 
 `
 
@@ -90,4 +91,11 @@ transition: all 300ms;
     cursor: pointer;
     transform: scale(1.1);
 }
+`
+
+export const PizzaGraphic = styled.div`
+
+width: 50vw;
+height: 65vh;
+padding: 1rem;
 `

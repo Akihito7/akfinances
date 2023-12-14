@@ -1,3 +1,4 @@
+import { theme } from '../../theme';
 import {
     Container,
     Header,
@@ -9,8 +10,19 @@ import {
     NameText,
     ButtonLogout,
     ImageLogout,
+    PizzaGraphic,
 
 } from './style'
+
+import { VictoryPie } from 'victory';
+
+const CATEGORIES = [
+    { x: 3, y: 6, label: "15%", color: "green" },
+    { x: 3, y: 6, label: "15%", color: "pink" },
+    { x: 2, y: 8, label: "20%", color: "orange" },
+    { x: 1, y: 40, label: "50%", color: "purple" },
+]
+
 
 export function Resume() {
     return (
@@ -38,6 +50,25 @@ export function Resume() {
                 </ContainerHeader>
 
             </Header>
+            <PizzaGraphic>
+                <VictoryPie
+                    data={CATEGORIES}
+                    colorScale={CATEGORIES.map(item => item.color)}
+                    labelRadius={70}
+                    style={{
+                        labels: {
+                            fontSize: 18,
+                            fontWeight: 'bold',
+                            fill: theme.colors.white[100]
+                        }
+                    }}
+
+
+                />
+
+            </PizzaGraphic>
+
+
 
 
         </Container>
