@@ -5,10 +5,18 @@ import {
     Title,
 } from './style'
 
+import { useNavigate } from "react-router-dom"
+
 export function Menu() {
+
+    const navigate = useNavigate();
+
     return (
         <Container>
-            <ContainerIcon>
+         
+                
+            
+            <ContainerIcon onClick={() =>navigate("/")}>
                 <Icon
                     src='Listagem.svg'
                     alt='icone de lista'
@@ -16,7 +24,7 @@ export function Menu() {
                 <Title>Transações</Title>
             </ContainerIcon>
 
-            <ContainerIcon>
+            <ContainerIcon onClick={() => navigate("/register")}>
                 <Icon
                     src='Importar.svg'
                     alt='icone do dollar'
@@ -24,7 +32,7 @@ export function Menu() {
                 <Title>Cadastrar</Title>
             </ContainerIcon>
 
-            <ContainerIcon>
+            <ContainerIcon  onClick={() =>navigate("/resume")}>
                 <Icon
                     src='pie-chart.svg'
                     alt='icone de grafico pizza'
