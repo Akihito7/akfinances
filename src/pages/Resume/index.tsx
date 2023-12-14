@@ -7,6 +7,8 @@ import {
     Image,
     OlaText,
     NameText,
+    ButtonLogout,
+    ImageLogout,
 
 } from './style'
 
@@ -26,6 +28,13 @@ export function Resume() {
                             <NameText>Xamã</NameText>
                         </ContainerTextImage>
                     </ContainerImage>
+
+                    <ButtonLogout>
+                        <ImageLogout
+                            src="power.svg"
+                            alt="botão de logout"
+                        />
+                    </ButtonLogout>
                 </ContainerHeader>
 
             </Header>

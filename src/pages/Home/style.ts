@@ -115,6 +115,13 @@ background-color: ${theme.colors.orange[100]};
 
 `
 
+export const ImageLogout = styled.img`
+
+width: 28px;
+height: 28px;
+`
+
+
 export const ButtonLogout = styled.button`
 background: none;
 border: none;
@@ -127,12 +134,6 @@ transition: all 300ms;
     cursor: pointer;
     transform: scale(1.1);
 }
-`
-
-export const ImageLogout = styled.img`
-
-width: 28px;
-height: 28px;
 `
 
 export const OlaText = styled.p`

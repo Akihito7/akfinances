@@ -69,3 +69,25 @@ color: ${theme.colors.white[100]};
 line-height: 1;
 
 `
+
+
+export const ImageLogout = styled.img`
+
+width: 28px;
+height: 28px;
+`
+
+
+export const ButtonLogout = styled.button`
+background: none;
+border: none;
+display: flex;
+transition: all 300ms;
+
+
+&:hover{
+    opacity: .5;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+`

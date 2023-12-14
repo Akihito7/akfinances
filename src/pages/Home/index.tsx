@@ -12,10 +12,10 @@ import {
     ContainerTransactions,
     Image,
     ButtonLogout,
+    ImageLogout,
     OlaText,
     NameText,
     GenericText,
-    ImageLogout,
 
 } from "./style"
 
