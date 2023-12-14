@@ -173,7 +173,6 @@ height: 2.8rem;
 
 `
 
-
 export const ButtonSend = styled.button`
 
 width: 100%;
