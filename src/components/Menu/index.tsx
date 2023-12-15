@@ -1,43 +1,69 @@
+import { useState } from 'react';
 import {
     Container,
     ContainerIcon,
-    Icon,
     Title,
 } from './style'
 
 import { useNavigate } from "react-router-dom"
+import { FormatListBulleted, AttachMoney, PieChart } from "@mui/icons-material";
+import { theme } from '../../theme';
 
-export function Menu() {
+export function Menu({ screenSelected }: { screenSelected: string }) {
 
     const navigate = useNavigate();
+    const [selected, setSelected] = useState(screenSelected);
+
+    function handleNavigation(navigateTo: string) {
+
+        navigate(navigateTo);
+    }
 
     return (
         <Container>
-         
-                
-            
-            <ContainerIcon onClick={() =>navigate("/")}>
-                <Icon
-                    src='Listagem.svg'
-                    alt='icone de lista'
+            <ContainerIcon onClick={() => handleNavigation("/")}>
+                <FormatListBulleted
+                    style={{
+                        width: 24,
+                        height: 24,
+                        color: selected === 'home' ? theme.colors.orange[100] : theme.colors.blue[100]
+                    }}
                 />
-                <Title>Transações</Title>
+                <Title
+                    selected={selected === 'home' && true}
+                >
+                    Transações
+                </Title>
             </ContainerIcon>
 
-            <ContainerIcon onClick={() => navigate("/register")}>
-                <Icon
-                    src='Importar.svg'
-                    alt='icone do dollar'
+            <ContainerIcon onClick={() => handleNavigation("/register")}>
+                <AttachMoney
+                    style={{
+                        width: 24,
+                        height: 24,
+                        color: selected === 'register' ? theme.colors.orange[100] : theme.colors.blue[100]
+                    }}
                 />
-                <Title>Cadastrar</Title>
+                <Title
+                    selected={selected === 'register' && true}
+                >
+                    Cadastrar
+                </Title>
             </ContainerIcon>
 
-            <ContainerIcon  onClick={() =>navigate("/resume")}>
-                <Icon
-                    src='pie-chart.svg'
-                    alt='icone de grafico pizza'
+            <ContainerIcon onClick={() => handleNavigation("/resume")}>
+                <PieChart
+                    style={{
+                        width: 24,
+                        height: 24,
+                        color: selected === 'resume' ? theme.colors.orange[100] : theme.colors.blue[100]
+                    }}
                 />
-                <Title>Resumo</Title>
+                <Title
+                    selected={selected === 'resume' && true}
+                >
+                    Resumo
+                </Title>
             </ContainerIcon>
 
         </Container>

@@ -100,7 +100,7 @@ export function Resume() {
             </ContainerCategories>
             </Main>
 
-            <Menu />
+            <Menu screenSelected='resume'/>
 
         </Container>
     )

@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 
+type PropsSelected = {
+    selected : boolean;
+};
+
+
 export const Container = styled.div`
 
 width: 52.1rem;
@@ -34,17 +39,10 @@ transition : all 300ms;
 
 `
 
-export const Icon = styled.img`
-
-
-width: 2.4rem;
-height: 2.4rem;
-`
-
-export const Title = styled.h1`
+export const Title = styled.h1<PropsSelected>`
 
 font-family: "Poppins", sans-serif;
 font-size: 1.6rem;
-color: ${theme.colors.blue[100]};
+color : ${({ selected }) => selected ? theme.colors.orange[100] : theme.colors.blue[100]}
 
 `

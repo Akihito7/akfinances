@@ -80,7 +80,7 @@ export function Home() {
                 }
             </ContainerTransactions>
 
-            <Menu />
+            <Menu screenSelected="home" />
         </Container >
     )
 }
