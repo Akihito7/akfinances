@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 
+
 export const Container = styled.div`
 
 width: 100vw;
@@ -11,6 +12,30 @@ overflow-x: hidden;
 .hidden {
     display: none;
 }
+
+&::-webkit-scrollbar {
+    height: 1.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${theme.colors.white[200]}; 
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${theme.colors.purple[100]}; 
+    border-radius: 99px;
+  
+
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: ${theme.colors.purple[100]}; 
+  
+  }
+
 
 `
 
@@ -27,8 +52,36 @@ flex-direction: column;
 
 overflow: visible;
 
-
 `
+
+export const ContainerHeader = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-between;
+`
+
+export const Image = styled.img`
+
+width: 28px;
+height: 28px;
+`
+
+
+export const Button = styled.button`
+background: none;
+border: none;
+display: flex;
+transition: all 300ms;
+
+
+&:hover{
+    opacity: .5;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+`
+
+
 
 export const ExtendedArea = styled.div`
 flex: 1; 

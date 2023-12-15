@@ -14,24 +14,46 @@ import {
     ButtonSelect,
     ButtonSend,
     Header,
+    ContainerHeader,
+    Image,
+    Button,
     ExtendedArea,
 } from './style'
 
 import { Input } from '../../components/Input'
+import { useNavigate } from "react-router-dom"
 
 export function Register() {
 
     const [categoryOpen, setCategoryOpen] = useState(false);
+    const navigate = useNavigate();
 
     function handleCategoryOpen() {
         if (categoryOpen) setCategoryOpen(false)
         else setCategoryOpen(true)
     };
 
+
+
     return (
         <Container>
-
             <Header>
+                <ContainerHeader>
+                    <Button onClick={() => navigate(-1)}>
+                        <Image
+                            src="arrowLeft.svg"
+                            alt="botão de voltar"
+                        />
+                    </Button>
+
+                    <Button>
+                        <Image
+                            src="power.svg"
+                            alt="botão de logout"
+                        />
+                    </Button>
+
+                </ContainerHeader>
                 <ExtendedArea>
                     <ContainerForm>
                         <Title>Cadastro</Title>
