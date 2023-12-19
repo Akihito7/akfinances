@@ -68,7 +68,7 @@ font-size: 2.4rem;
 margin-bottom: 2.9rem;
 
 `
-export const PhraseLogin = styled.div`
+export const PhraseRegister = styled.div`
 font-family: 'Poppins', sans-serif;
 font-weight: bold;
 color: ${theme.colors.blue[100]};
@@ -86,7 +86,7 @@ gap: 1rem;
 
 `
 
-export const ButtonLogin = styled.div`
+export const ButtonRegister = styled.div`
 
 display: flex;
 align-items: center;
@@ -126,10 +126,11 @@ transition : all 300ms;
     cursor: pointer;
 }
 `
-export const DontHaveAccount = styled.div`
+export const AlreadyHaveAccount = styled.div`
 color: ${theme.colors.blue[100]};
 font-family: 'Poppins', sans-serif;
 font-size: 1.4rem;
+margin-top: 10rem;
 
 transition : all 300ms;
 
