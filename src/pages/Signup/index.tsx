@@ -1,3 +1,4 @@
+import { useAuth } from '../../Contexts/AuthContext';
 import { Input } from '../../components/Input'
 import {
     Container,
@@ -15,7 +16,28 @@ import {
     AlreadyHaveAccount,
 } from './style'
 
+import { Controller, useForm } from "react-hook-form";
+
+type SignupProps = {
+    email: string;
+    name: string;
+    password: string;
+}
+
 export function Signup() {
+
+    const { control, handleSubmit, reset } = useForm();
+    const { signup } = useAuth();
+
+    async function handleSignup(userInfo: SignupProps) {
+        signup(userInfo)
+        reset({
+            name: '', 
+            email: '', 
+            password: '', 
+        });
+    }
+
     return (
         <Container>
             <ContainerLogin>
@@ -31,13 +53,43 @@ export function Signup() {
                 </Header>
 
                 <ContainerInputs>
-                    <Input placeholder='Nome' />
+                    <Controller
+                        name='name'
+                        control={control}
 
-                    <Input placeholder='E-mail' />
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                value={value}
+                                onChange={(event) => onChange(event.target.value)}
+                                placeholder='Nome'
+                            />
+                        )}
+                    />
 
-                    <Input placeholder='Password' />
+                    <Controller
+                        name='email'
+                        control={control}
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                value={value}
+                                onChange={(event) => onChange(event.target.value)}
+                                placeholder='E-mail'
+                            />
+                        )}
+                    />
+                    <Controller
+                        name='password'
+                        control={control}
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                value={value}
+                                onChange={(event) => onChange(event.target.value)}
+                                placeholder='Password'
+                            />
+                        )}
+                    />
 
-                    <ButtonRegister>
+                    <ButtonRegister onClick={handleSubmit(handleSignup)}>
                         Register
                     </ButtonRegister>
 

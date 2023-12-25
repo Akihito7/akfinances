@@ -16,7 +16,11 @@ import {
     DontHaveAccount,
 } from './style'
 
+import { useNavigate } from 'react-router-dom'
+
 export function Signln() {
+
+    const navigate = useNavigate();
     return (
         <Container>
             <ContainerLogo>
@@ -42,14 +46,14 @@ export function Signln() {
 
             <ContainerLogin>
                 <Header>
-                <TextLogin>
-                    Login
-                </TextLogin>
+                    <TextLogin>
+                        Login
+                    </TextLogin>
 
-                <PhraseLogin>
-                    Bem-vindo de volta! <br />
-                    Continue no controle das suas finanças aqui.
-                </PhraseLogin>
+                    <PhraseLogin>
+                        Bem-vindo de volta! <br />
+                        Continue no controle das suas finanças aqui.
+                    </PhraseLogin>
                 </Header>
 
                 <ContainerInputs>
@@ -61,13 +65,13 @@ export function Signln() {
                         Logar
                     </ButtonLogin>
 
-                <ForgetPassword>
-                    Esqueci minha senha!
-                </ForgetPassword>
+                    <ForgetPassword>
+                        Esqueci minha senha!
+                    </ForgetPassword>
 
                 </ContainerInputs>
 
-                <DontHaveAccount>
+                <DontHaveAccount onClick={() => navigate("/register")}>
                     Ainda não tem conta? Crie uma!
                 </DontHaveAccount>
             </ContainerLogin>

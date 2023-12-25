@@ -6,11 +6,11 @@ import { useAuth } from "../Contexts/AuthContext";
 
 
 export function Routes() {
-    const user = useAuth()
+
 
     return (
         <BrowserRouter>
-            {user ? <AppRoutes /> : <AuthRoutes />}
+            {false ? <AppRoutes /> : <AuthRoutes />}
         </BrowserRouter>
     )
 }
