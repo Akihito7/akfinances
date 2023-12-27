@@ -33,6 +33,7 @@ export function Home() {
         try {
             const response = await api.get(`/transaction/${user.id}`);
             setTransactions(response.data);
+            console.log(response.data)
 
         } catch (error) {
             console.log(error)
@@ -93,9 +94,12 @@ export function Home() {
 
             <ContainerTransactions>
 
-                {   
-                    transactions.map(() => (
-                        <TransactionCard />
+                {
+                    transactions.map((transaction, index) => (
+                        <TransactionCard
+                            key={index}
+                            transaction={transaction}
+                        />
                     ))
                 }
             </ContainerTransactions>

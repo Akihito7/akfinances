@@ -10,20 +10,34 @@ import {
 
 } from './style'
 
-export function TransactionCard() {
+type TransactionCardProps = {
+    transaction: {
+        name: string;
+        value: string;
+        category: string;
+        date: string;
+    }
+
+}
+
+export function TransactionCard({ transaction }: TransactionCardProps) {
+
+    const amountFormatted = Number(transaction.value)
+        .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
     return (
         <Container>
-            <Title>Hamburgueria Pizzy</Title>
-            <Amount>-R$ 59.90</Amount>
+            <Title>{transaction.name}</Title>
+            <Amount>{amountFormatted}</Amount>
             <Footer>
                 <ContainerIcon>
-                    <Icon 
-                    src='Alimentação.svg'
-                    alt='Icone do tipo da transacão'
-                    ></Icon>
-                    <IconText>Alimentação</IconText>
+                    <Icon
+                        src={`${transaction.category}.svg`}
+                        alt='Icone do tipo da transacão'
+                    />
+                    <IconText>{transaction.category}</IconText>
                 </ContainerIcon>
-                <Date>13/04/2020</Date>
+                <Date>{transaction.date}</Date>
             </Footer>
         </Container>
     )
