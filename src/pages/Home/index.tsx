@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { HighlightCard } from "../../components/HighlightCard"
 import { Menu } from "../../components/Menu"
 import { TransactionCard } from "../../components/TransactionCard"
@@ -19,9 +20,28 @@ import {
 
 } from "./style"
 
-const LISTA = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+import { api } from "../../axios"
+import { useAuth } from "../../Contexts/AuthContext"
 
 export function Home() {
+
+    const [transactions, setTransactions] = useState([]);
+
+    const { user } = useAuth();
+
+    async function getTransactions() {
+        try {
+            const response = await api.get(`/transaction/${user.id}`);
+            setTransactions(response.data);
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getTransactions();
+    }, [transactions])
     return (
         <Container>
             <Header>
@@ -73,8 +93,8 @@ export function Home() {
 
             <ContainerTransactions>
 
-                {
-                    LISTA.map(() => (
+                {   
+                    transactions.map(() => (
                         <TransactionCard />
                     ))
                 }
