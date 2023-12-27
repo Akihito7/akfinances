@@ -16,11 +16,45 @@ import {
     DontHaveAccount,
 } from './style'
 
+import { Controller, useForm } from 'react-hook-form';
+import { useAuth } from '../../Contexts/AuthContext';
+
 import { useNavigate } from 'react-router-dom'
+
+type LoginProps = {
+    email: string;
+    password: string;
+};
 
 export function Signln() {
 
+    const { control, handleSubmit, reset } = useForm();
+
+    const { signln } = useAuth()
+
     const navigate = useNavigate();
+
+    async function handleLogin({ email, password }: LoginProps) {
+        try {
+            const credentials = {
+                email,
+                password
+            };
+            console.log(credentials)
+
+            signln(credentials);
+
+            reset({
+                email: '',
+                password: ''
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
     return (
         <Container>
             <ContainerLogo>
@@ -57,11 +91,37 @@ export function Signln() {
                 </Header>
 
                 <ContainerInputs>
-                    <Input placeholder='E-mail' />
+                    <Controller
+                        name='email'
+                        control={control}
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                placeholder='E-mail'
+                                onChange={(event) => onChange(event.target.value)}
+                                value={value}
 
-                    <Input placeholder='Password' />
+                            />
+                        )}
 
-                    <ButtonLogin>
+                    />
+
+                    <Controller
+                        name='password'
+                        control={control}
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                placeholder='Password'
+                                onChange={(event) => onChange(event.target.value)}
+                                value={value}
+
+                            />
+                        )}
+
+                    />
+
+                    <ButtonLogin
+                        onClick={handleSubmit(handleLogin)}
+                    >
                         Logar
                     </ButtonLogin>
 
@@ -75,9 +135,6 @@ export function Signln() {
                     Ainda não tem conta? Crie uma!
                 </DontHaveAccount>
             </ContainerLogin>
-
-
-
         </Container>
     )
 }

@@ -11,6 +11,13 @@ interface AuthContextProviderProps {
 type AuthContextProps = {
     signln: (credetials: SignlnProps) => void;
     signup: (UserInfo: SignupProps) => void;
+    user : UserProps;
+}
+
+type UserProps = {
+    id: string,
+    email: string;
+    name: string;
 }
 
 type SignlnProps = {
@@ -24,15 +31,16 @@ type SignupProps = {
     password: string;
 }
 
+
 function AuthContextProvider({ children }: AuthContextProviderProps) {
 
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({} as UserProps);
     const [token, setToken] = useState(null)
 
     async function signln(credentials: SignlnProps) {
 
         try {
-            const response = await api.post("/auth/siglnl", {
+            const response = await api.post("/auth/signln", {
                 email: credentials.email,
                 password: credentials.password
             });
@@ -63,7 +71,7 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ signup, signln }}>
+        <AuthContext.Provider value={{ signup, signln, user }}>
             {children}
         </AuthContext.Provider>
     );
