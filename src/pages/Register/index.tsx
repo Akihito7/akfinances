@@ -23,17 +23,55 @@ import {
 import { Input } from '../../components/Input'
 import { useNavigate } from "react-router-dom"
 
+import { categories } from '../../utils/categories';
+
+import { Controller, useForm } from "react-hook-form"
+import { api } from '../../axios';
+import { useAuth } from '../../Contexts/AuthContext';
+
+
 export function Register() {
 
     const [categoryOpen, setCategoryOpen] = useState(false);
+    const [typeTransaction, setTypeTransaction] = useState('');
+    const [categorySelected, setCategorySelected] = useState('');
     const navigate = useNavigate();
+
+    const { control, handleSubmit, reset } = useForm();
+    const { user } = useAuth();
 
     function handleCategoryOpen() {
         if (categoryOpen) setCategoryOpen(false)
         else setCategoryOpen(true)
     };
 
+    async function handleRegisterTransaction(transaction: {}) {
 
+        const today = new Date();
+        const day = today.getDate();
+        let month = today.getMonth() + 1;
+        let year = today.getFullYear();
+
+        try {
+            await api.post("/transaction/", {
+                name: transaction.name,
+                value: transaction.price,
+                category: categorySelected,
+                type: typeTransaction,
+                date: `${day}/${month}/${year}`,
+                user_id: user.id,
+            });
+            reset({
+                'name': '',
+                'price': '',
+            });
+            setTypeTransaction('');
+            setCategorySelected('');
+            navigate('/');
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <Container>
@@ -57,23 +95,48 @@ export function Register() {
                 <ExtendedArea>
                     <ContainerForm>
                         <Title>Cadastro</Title>
-                        <Input
-                            placeholder='Nome'
+
+                        <Controller
+                            name='name'
+                            control={control}
+                            render={({ field: { onChange, value } }) => (
+
+                                <Input
+                                    placeholder='Nome'
+                                    onChange={(event) => onChange(event.target.value)}
+                                    value={value}
+                                />
+                            )}
                         />
-                        <Input
-                            placeholder='Preço'
+
+                        <Controller
+                            name='price'
+                            control={control}
+                            render={({ field: { onChange, value } }) => (
+
+                                <Input
+                                    placeholder='Preço'
+                                    onChange={(event) => onChange(event.target.value)}
+                                    value={value}
+                                />
+                            )}
                         />
 
                         <ContainerButtons>
-
-                            <ButtonTypeTransaction>
+                            <ButtonTypeTransaction
+                                selected={typeTransaction === "income" && "green"}
+                                onClick={() => { setTypeTransaction("income") }}
+                            >
                                 <ButtonIcon
                                     src='Entradas.svg'
                                 />
                                 Income
                             </ButtonTypeTransaction>
 
-                            <ButtonTypeTransaction>
+                            <ButtonTypeTransaction
+                                selected={typeTransaction === "outcome" && "red"}
+                                onClick={() => { setTypeTransaction("outcome") }}
+                            >
                                 <ButtonIcon
                                     src='Saidas.svg'
                                 />
@@ -83,35 +146,37 @@ export function Register() {
 
                         <ContainerCategory>
                             <ButtonSelect onClick={handleCategoryOpen}>
-                                Categoria
+                                {categorySelected != '' ? categorySelected : "Categorias"}
                             </ButtonSelect>
                             <ContainerButtonsCategory
                                 className={categoryOpen ? '' : 'hidden'}
                             >
-                                <ButtonOfCategory>
-                                    <IconCategory src='coffee.svg' />
-                                    Alimentação
-                                </ButtonOfCategory>
-                                <ButtonOfCategory>
-                                    <IconCategory src='shopping-bag.svg' />
-                                    Compras
-                                </ButtonOfCategory>
-                                <ButtonOfCategory>
-                                    <IconCategory src='dollar-sign.svg' />
-                                    Salário
-                                </ButtonOfCategory>
-                                <ButtonOfCategory>
-                                    <IconCategory src='smile.svg' />
-                                    Diversão
-                                </ButtonOfCategory>
-                                <ButtonOfCategory>
-                                    <IconCategory src='book.svg' />
-                                    Estudos
-                                </ButtonOfCategory>
+
+                                {
+                                    categories.map((category) => (
+                                        <ButtonOfCategory
+                                            onClick={() => {
+                                                setCategorySelected(category.categoria)
+                                                setCategoryOpen(false)
+                                            }}
+                                        >
+                                            <IconCategory
+                                                src={category.icon}
+                                                alt='icone da categoria'
+                                            />
+                                            {category.categoria}
+                                        </ButtonOfCategory>
+                                    ))
+                                }
+
                             </ContainerButtonsCategory>
                         </ContainerCategory>
 
-                        <ButtonSend>Salvar</ButtonSend>
+                        <ButtonSend
+                            onClick={handleSubmit(handleRegisterTransaction)}
+                        >
+                            Salvar
+                        </ButtonSend>
 
 
                     </ContainerForm>

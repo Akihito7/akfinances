@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 
+type ButtonTypeProps = {
+  selected: string;
+};
 
 export const Container = styled.div`
 
@@ -125,13 +128,16 @@ gap: 20px;
 display: flex;
 `
 
-export const ButtonTypeTransaction = styled.div`
+export const ButtonTypeTransaction = styled.div<ButtonTypeProps>`
 
 width: 50%;
 gap: 5px;
 border-radius: 5px;
 background-color: ${theme.colors.white[100]};
-border: 2px solid ${theme.colors.white[300]};
+border : 2px solid ${({ selected }) => (
+  selected ? theme.colors[selected][100] : theme.colors.white[100]
+)};
+
 
 font-family: 'Poppins', sans-serif;
 font-size: 1.6rem;
