@@ -1,6 +1,9 @@
 import styled from "styled-components"
 import { theme } from "../../theme"
 
+type AmountProps = {
+    type: "outcome" | "income";
+}
 export const Container = styled.div`
 min-width: 24rem;
 height: 12rem;
@@ -28,12 +31,14 @@ font-weight: 500;
 color: ${theme.colors.blue[100]};
 
 `
-export const Amount = styled.h1`
+export const Amount = styled.h1<AmountProps>`
 flex: 1;
 font-size: 2.2rem;
 font-family: 'Poppins', sans-serif;
 font-weight: 400;
-color: ${theme.colors.green[100]};
+color : ${({ type }) => (
+        type === "income" ? theme.colors.green[100] : theme.colors.red[100]
+    )}
 `
 
 export const Footer = styled.div`

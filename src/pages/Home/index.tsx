@@ -26,6 +26,23 @@ import { useAuth } from "../../Contexts/AuthContext"
 export function Home() {
 
     const [transactions, setTransactions] = useState([]);
+    const [HighLightAmount, setHighLightAmount] = useState({
+        entriesTotal: {
+            amount: '0'
+        },
+        expensiveTotal: {
+            amount: '0'
+        },
+        total: {
+            amount: '0'
+        }
+    });
+
+    const [LastTransaction, setLastTransaction] = useState({
+        entriesTotal: "Nenhuma entrada ainda",
+        expensiveTotal: "Nenhuma saida ainda"
+    });
+
 
     const { user } = useAuth();
 
@@ -33,16 +50,61 @@ export function Home() {
         try {
             const response = await api.get(`/transaction/${user.id}`);
             setTransactions(response.data);
-            console.log(response.data)
 
         } catch (error) {
             console.log(error)
         }
-    }
+    };
+
+    function setHighlightCardsAmount() {
+
+        let entriesTotal = 0;
+        let expensiveTotal = 0;
+        let lastEntriesTotal = "";
+        let lastExpensiveTotal = "";
+
+        transactions.map((transaction => {
+            if (transaction.type === "income") {
+                entriesTotal = entriesTotal + Number(transaction.value);
+                lastEntriesTotal = transaction.date;
+
+            } else {
+                expensiveTotal = expensiveTotal + Number(transaction.value);
+                lastExpensiveTotal = transaction.date
+            }
+        }));
+
+        const [dayLastEntries, monthLastEntries] = lastEntriesTotal.split("/");
+        const [dayLastExpensive, monthLastExpensive] = lastExpensiveTotal.split("/");
+
+        const monthNameLastEntries = new Date(0, Number(monthLastEntries) - 1).toLocaleString('default', { month: 'long' });
+        const monthNameLastExpensive = new Date(0, Number(monthLastExpensive) - 1).toLocaleString('default', { month: 'long' });
+
+        const lastEntriesTotalFormatted = `Ultima transação em ${dayLastEntries} de ${monthNameLastEntries}`
+
+        const lastExpensiveTotalFormatted = `Ultima transação em ${dayLastExpensive} de ${monthLastExpensive}`
+
+        setLastTransaction({
+            entriesTotal: lastEntriesTotalFormatted,
+            expensiveTotal: lastExpensiveTotalFormatted,
+        })
+
+
+        setHighLightAmount({
+            entriesTotal: { amount: String(entriesTotal) },
+            expensiveTotal: { amount: String(expensiveTotal) },
+            total: { amount: String(entriesTotal - expensiveTotal) }
+        })
+    };
 
     useEffect(() => {
         getTransactions();
-    }, [transactions])
+    }, [])
+
+    useEffect(() => {
+        setHighlightCardsAmount();
+    },[transactions])
+
     return (
         <Container>
             <Header>
@@ -70,21 +132,21 @@ export function Home() {
                     <HighlightCard
                         title="Entradas"
                         type="up"
-                        amount="17.400"
-                        lastTransaction="Última entrada dia 13 de abril"
+                        amount={HighLightAmount.entriesTotal.amount}
+                        lastTransaction={LastTransaction.entriesTotal}
                     />
 
                     <HighlightCard
                         title="Saídas"
                         type="down"
-                        amount="1.259"
-                        lastTransaction="Última saída dia 03 de abril"
+                        amount={HighLightAmount.expensiveTotal.amount}
+                        lastTransaction={LastTransaction.expensiveTotal}
                     />
 
                     <HighlightCard
                         title="Total"
                         type="total"
-                        amount="16.141"
+                        amount={HighLightAmount.total.amount}
                         lastTransaction="01 à 16 de abril"
                     />
                 </ExtendedArea>

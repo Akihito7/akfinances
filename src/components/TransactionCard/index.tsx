@@ -16,6 +16,7 @@ type TransactionCardProps = {
         value: string;
         category: string;
         date: string;
+        type: string;
     }
 
 }
@@ -28,7 +29,12 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
     return (
         <Container>
             <Title>{transaction.name}</Title>
-            <Amount>{amountFormatted}</Amount>
+            <Amount
+                type={transaction.type === "income" ? "income" : "outcome"}
+            >
+                {transaction.type === "outcome" && "- "}
+                {amountFormatted}
+            </Amount>
             <Footer>
                 <ContainerIcon>
                     <Icon

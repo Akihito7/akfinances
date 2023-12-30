@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { theme } from "../../theme";
 
 type ButtonTypeProps = {
-  selected: string;
+  selected: boolean;
+  color : string;
 };
 
 export const Container = styled.div`
@@ -134,8 +135,8 @@ width: 50%;
 gap: 5px;
 border-radius: 5px;
 background-color: ${theme.colors.white[100]};
-border : 2px solid ${({ selected }) => (
-  selected ? theme.colors[selected][100] : theme.colors.white[100]
+border : 2px solid ${({ selected, color}) => (
+  selected ? theme.colors[color][100] : theme.colors.white[200]
 )};
 
 

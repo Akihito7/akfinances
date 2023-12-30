@@ -124,24 +124,23 @@ export function Register() {
 
                         <ContainerButtons>
                             <ButtonTypeTransaction
-                                selected={typeTransaction === "income" && "green"}
+                                selected={typeTransaction === "income" ? true : false}
+                                color='green'
                                 onClick={() => { setTypeTransaction("income") }}
                             >
-                                <ButtonIcon
-                                    src='Entradas.svg'
-                                />
+                                <ButtonIcon src='Entradas.svg' />
                                 Income
                             </ButtonTypeTransaction>
 
                             <ButtonTypeTransaction
-                                selected={typeTransaction === "outcome" && "red"}
+                                selected={typeTransaction === "outcome" ? true : false}
+                                color='red'
                                 onClick={() => { setTypeTransaction("outcome") }}
                             >
-                                <ButtonIcon
-                                    src='Saidas.svg'
-                                />
-                                Income
+                                <ButtonIcon src='Saidas.svg' />
+                                Outcome
                             </ButtonTypeTransaction>
+
                         </ContainerButtons>
 
                         <ContainerCategory>
