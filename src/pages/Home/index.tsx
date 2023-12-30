@@ -82,7 +82,7 @@ export function Home() {
 
         const lastEntriesTotalFormatted = `Ultima transação em ${dayLastEntries} de ${monthNameLastEntries}`
 
-        const lastExpensiveTotalFormatted = `Ultima transação em ${dayLastExpensive} de ${monthLastExpensive}`
+        const lastExpensiveTotalFormatted = `Ultima transação em ${dayLastExpensive} de ${monthNameLastExpensive}`
 
         setLastTransaction({
             entriesTotal: lastEntriesTotalFormatted,
