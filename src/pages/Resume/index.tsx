@@ -14,6 +14,9 @@ import {
     ResumeByCategory,
     Main,
     PizzaGraphic,
+    ContainerButtonsMonth,
+    MonthButton,
+    MonthText,
     ContainerCategories,
     CardCategory,
     TitleCategory,
@@ -60,47 +63,57 @@ export function Resume() {
 
             </Header>
 
-          <Main>
-            <PizzaGraphic>
-                <VictoryPie
-               
-                    data={CATEGORIES}
-                    colorScale={CATEGORIES.map(item => item.color)}
-                    labelRadius={70}
-                    style={{
-                        
-                        labels: {
-                            fontSize: 18,
-                            fontWeight: 'bold',
-                            fill: theme.colors.white[100]
-                        }
-                    }}
+            <Main>
+                <PizzaGraphic>
+                    <ContainerButtonsMonth>
+                        <MonthButton
+                            src='arrowLeftMonth.svg'
+                            alt='seta para a esquerda'
+                        />
+                        <MonthText>Janeiro,2024</MonthText>
+                        <MonthButton
+                            src='arrowRightMonth.svg'
+                            alt='seta para a esquerda'
+                        />
+                    </ContainerButtonsMonth>
+                    <VictoryPie
 
-                />
+                        data={CATEGORIES}
+                        colorScale={CATEGORIES.map(item => item.color)}
+                        labelRadius={70}
+                        style={{
 
-            </PizzaGraphic>
+                            labels: {
+                                fontSize: 18,
+                                fontWeight: 'bold',
+                                fill: theme.colors.white[100]
+                            }
+                        }}
 
-            <ContainerCategories>
-                <CardCategory category="purchases">
-                    <TitleCategory>Compras</TitleCategory>
-                    <AmountCategory><SpanCategory>R$</SpanCategory>1.200</AmountCategory>
-                </CardCategory>
-                <CardCategory category="car">
-                    <TitleCategory>Carro</TitleCategory>
-                    <AmountCategory><SpanCategory>R$</SpanCategory>7000</AmountCategory>
-                </CardCategory>
-                <CardCategory category="food">
-                    <TitleCategory>Alimentação</TitleCategory>
-                    <AmountCategory><SpanCategory>R$</SpanCategory>500</AmountCategory>
-                </CardCategory>
-                <CardCategory category="leisure">
-                    <TitleCategory>Lazer</TitleCategory>
-                    <AmountCategory><SpanCategory>R$</SpanCategory>500</AmountCategory>
-                </CardCategory>
-            </ContainerCategories>
+                    />
+                </PizzaGraphic>
+
+                <ContainerCategories>
+                    <CardCategory category="purchases">
+                        <TitleCategory>Compras</TitleCategory>
+                        <AmountCategory><SpanCategory>R$</SpanCategory>1.200</AmountCategory>
+                    </CardCategory>
+                    <CardCategory category="car">
+                        <TitleCategory>Carro</TitleCategory>
+                        <AmountCategory><SpanCategory>R$</SpanCategory>7000</AmountCategory>
+                    </CardCategory>
+                    <CardCategory category="food">
+                        <TitleCategory>Alimentação</TitleCategory>
+                        <AmountCategory><SpanCategory>R$</SpanCategory>500</AmountCategory>
+                    </CardCategory>
+                    <CardCategory category="leisure">
+                        <TitleCategory>Lazer</TitleCategory>
+                        <AmountCategory><SpanCategory>R$</SpanCategory>500</AmountCategory>
+                    </CardCategory>
+                </ContainerCategories>
             </Main>
 
-            <Menu screenSelected='resume'/>
+            <Menu screenSelected='resume' />
 
         </Container>
     )

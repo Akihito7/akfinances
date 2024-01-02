@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { theme } from "../../theme";
 
 type PropsCategory = {
-    "category" : string;
-} 
+    "category": string;
+}
 
 export const Container = styled.div`
 
@@ -120,6 +120,38 @@ export const PizzaGraphic = styled.div`
 
 width: 50vw;
 padding: 1rem;
+display: flex;
+flex-direction: column;
+`
+
+export const ContainerButtonsMonth = styled.div`
+
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 20px;
+margin-top: 10px;
+`
+
+export const MonthText = styled.div`
+
+font-family: 'Poppins', sans-serif;
+font-weight: 400;
+font-size: 1.8rem;
+color: ${theme.colors.blue[100]};
+
+`
+export const MonthButton = styled.img`
+
+width: 3rem;
+height: 3rem;
+
+transition: all 300ms;
+
+&:hover{
+    transform : scale(1.1);
+    cursor: pointer;
+}
 `
 
 export const ContainerCategories = styled.div`
@@ -129,7 +161,7 @@ gap: 1rem;
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content: center;
+justify-content: flex-end;
 padding: 1rem;
 
 

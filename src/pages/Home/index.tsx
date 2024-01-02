@@ -40,7 +40,8 @@ export function Home() {
 
     const [LastTransaction, setLastTransaction] = useState({
         entriesTotal: "Nenhuma entrada ainda",
-        expensiveTotal: "Nenhuma saida ainda"
+        expensiveTotal: "Nenhuma saida ainda",
+        total: "Nenhuma transação ainda"
     });
 
 
@@ -62,31 +63,57 @@ export function Home() {
         let expensiveTotal = 0;
         let lastEntriesTotal = "";
         let lastExpensiveTotal = "";
+        let totalDate = "";
+
+        let TOTALOFENTRIES = "";
+        let TOTALOFEXPENSIVE = "";
 
         transactions.map((transaction => {
             if (transaction.type === "income") {
                 entriesTotal = entriesTotal + Number(transaction.value);
                 lastEntriesTotal = transaction.date;
+                TOTALOFENTRIES = transaction.date;
+
 
             } else {
                 expensiveTotal = expensiveTotal + Number(transaction.value);
-                lastExpensiveTotal = transaction.date
+                lastExpensiveTotal = transaction.date;
+                TOTALOFEXPENSIVE = transaction.date;
             }
         }));
 
         const [dayLastEntries, monthLastEntries] = lastEntriesTotal.split("/");
         const [dayLastExpensive, monthLastExpensive] = lastExpensiveTotal.split("/");
 
+        const LASTTRANSACTIONOFENTRIES = Number(TOTALOFENTRIES.split("/").join(""));
+        const LASTTRANSACTIONOFEXPENSIVE = Number(TOTALOFEXPENSIVE.split("/").join(""));
+
+        const LastTransactionOfTotal = LASTTRANSACTIONOFENTRIES > LASTTRANSACTIONOFEXPENSIVE ?
+            LASTTRANSACTIONOFENTRIES : LASTTRANSACTIONOFEXPENSIVE;
+
+
+            console.log(LastTransactionOfTotal)
+
+        const dayTotal = String(LastTransactionOfTotal).substring(0,2);
+        const monthTotal = String(LastTransactionOfTotal).substring(2,4);
+        const monthNameTotal = new Date(0, Number(monthTotal) - 1).toLocaleString('default', { month: 'long' });
+
+        const lastTransactionTotal = `01 a ${dayTotal} de ${monthNameTotal}`
+
+    
+
         const monthNameLastEntries = new Date(0, Number(monthLastEntries) - 1).toLocaleString('default', { month: 'long' });
+
         const monthNameLastExpensive = new Date(0, Number(monthLastExpensive) - 1).toLocaleString('default', { month: 'long' });
 
-        const lastEntriesTotalFormatted = `Ultima transação em ${dayLastEntries} de ${monthNameLastEntries}`
+        const lastEntriesTotalFormatted = `Ultima entrada em ${dayLastEntries} de ${monthNameLastEntries}`
 
-        const lastExpensiveTotalFormatted = `Ultima transação em ${dayLastExpensive} de ${monthNameLastExpensive}`
+        const lastExpensiveTotalFormatted = `Ultima saida em ${dayLastExpensive} de ${monthNameLastExpensive}`
 
         setLastTransaction({
             entriesTotal: lastEntriesTotalFormatted,
             expensiveTotal: lastExpensiveTotalFormatted,
+            total: lastTransactionTotal,
         })
 
 
@@ -103,7 +130,7 @@ export function Home() {
 
     useEffect(() => {
         setHighlightCardsAmount();
-    },[transactions])
+    }, [transactions])
 
     return (
         <Container>
@@ -147,7 +174,7 @@ export function Home() {
                         title="Total"
                         type="total"
                         amount={HighLightAmount.total.amount}
-                        lastTransaction="01 à 16 de abril"
+                        lastTransaction={LastTransaction.total}
                     />
                 </ExtendedArea>
             </Header>
