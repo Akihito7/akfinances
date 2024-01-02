@@ -129,7 +129,6 @@ export const ContainerButtonsMonth = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 20px;
 margin-top: 10px;
 `
 
@@ -139,6 +138,8 @@ font-family: 'Poppins', sans-serif;
 font-weight: 400;
 font-size: 1.8rem;
 color: ${theme.colors.blue[100]};
+width: 20rem;
+text-align: center;
 
 `
 export const MonthButton = styled.img`

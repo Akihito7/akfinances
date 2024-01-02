@@ -29,6 +29,7 @@ import { ptBR } from "date-fns/locale";
 
 import { VictoryPie } from 'victory';
 import { useEffect, useState } from 'react';
+import { api } from '../../axios';
 
 const CATEGORIES = [
     { x: 3, y: 6, label: "15%", color: theme.colors.categories.food },
@@ -41,6 +42,7 @@ const CATEGORIES = [
 export function Resume() {
 
     const [dateSelected, setDateSelected] = useState(new Date());
+    const [transactions, setTransactions] = useState();
 
     function handleDataSelected(type: 'prev' | 'next') {
         if (type === "next") {
@@ -54,9 +56,18 @@ export function Resume() {
         }
     };
 
+    async function getTransactions() {
+        try {
+            const response = await api(`/transaction/bymonth/${dateSelected.toISOString()}`);
+            setTransactions(response.data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
-        dateSelected
-    }, []);
+        getTransactions();
+    }, [dateSelected]);
 
     return (
         <Container>
