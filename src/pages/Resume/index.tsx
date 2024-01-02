@@ -1,5 +1,3 @@
-import { Menu } from '../../components/Menu';
-import { theme } from '../../theme';
 import {
     Container,
     Header,
@@ -23,8 +21,14 @@ import {
     AmountCategory,
     SpanCategory,
 } from './style'
+import { Menu } from '../../components/Menu';
+import { theme } from '../../theme';
+
+import { addMonths, subMonths, format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 import { VictoryPie } from 'victory';
+import { useEffect, useState } from 'react';
 
 const CATEGORIES = [
     { x: 3, y: 6, label: "15%", color: theme.colors.categories.food },
@@ -35,6 +39,25 @@ const CATEGORIES = [
 
 
 export function Resume() {
+
+    const [dateSelected, setDateSelected] = useState(new Date());
+
+    function handleDataSelected(type: 'prev' | 'next') {
+        if (type === "next") {
+            const nextMonth = addMonths(dateSelected, 1);
+            console.log(nextMonth);
+            setDateSelected(nextMonth);
+        } else {
+            const prevDate = subMonths(dateSelected, 1);
+            console.log(prevDate);
+            setDateSelected(prevDate)
+        }
+    };
+
+    useEffect(() => {
+        dateSelected
+    }, []);
+
     return (
         <Container>
             <Header>
@@ -67,11 +90,18 @@ export function Resume() {
                 <PizzaGraphic>
                     <ContainerButtonsMonth>
                         <MonthButton
+                            onClick={() => {
+                                handleDataSelected("prev")
+                            }}
                             src='arrowLeftMonth.svg'
                             alt='seta para a esquerda'
                         />
-                        <MonthText>Janeiro,2024</MonthText>
+                        <MonthText>{format(dateSelected, 'MMMM, yyyy', { locale: ptBR })}
+                        </MonthText>
                         <MonthButton
+                            onClick={() => {
+                                handleDataSelected("next")
+                            }}
                             src='arrowRightMonth.svg'
                             alt='seta para a esquerda'
                         />
