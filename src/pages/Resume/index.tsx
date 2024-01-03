@@ -38,12 +38,23 @@ const CATEGORIES = [
     { x: 1, y: 40, label: "50%", color: theme.colors.categories.purchases },
 ]
 
+type TransactionsProps = {
+    name: string;
+    value: string;
+    category: string;
+};
+
+type TransactionsByCategoryProps = {
+    name: string;
+    amount: number;
+    category: string;
+}
 
 export function Resume() {
 
     const [dateSelected, setDateSelected] = useState(new Date());
-    const [transactions, setTransactions] = useState([]);
-    const [transactionByCategory, setTransactionByCategory] = useState();
+    const [transactions, setTransactions] = useState<TransactionsProps[]>([]);
+    const [transactionByCategory, setTransactionByCategory] = useState<TransactionsByCategoryProps[]>([]);
 
     function handleDataSelected(type: 'prev' | 'next') {
         if (type === "next") {
@@ -61,34 +72,53 @@ export function Resume() {
         try {
             const response = await api(`/transaction/bymonth/${dateSelected.toISOString()}`);
             setTransactions(response.data);
+            console.log(response.data)
         } catch (error) {
             console.log(error)
         }
     }
 
     async function startTransactions() {
-        let amountLazer = 0;
-        let amountDiversao = 0;
+        let amountLeisure = 0;
         let amountFood = 0;
-        console.log("chegeui aqui")
+        let amountSalary = 0;
+        let amountCar = 0;
+        let amountPurchases = 0;
+        let amountStudies = 0;
+        let total = 0
 
         transactions.map(transaction => {
-            
+
             if (transaction.category === "lazer") {
-                amountLazer = amountLazer + Number(transaction.value);
-                console.log("oi neumar")
+                amountLeisure = amountLeisure + Number(transaction.value);
             }
             if (transaction.category === "alimentação") {
                 amountFood = amountFood + Number(transaction.value);
             }
-            if (transaction.category === "diversão") {
-                amountDiversao = amountDiversao + Number(transaction.value);
+            if (transaction.category === "salário") {
+                amountSalary = amountSalary + Number(transaction.value);
             }
+            if (transaction.category === "carro") {
+                amountCar = amountCar + Number(transaction.value);
+            }
+            if (transaction.category == "compras") {
+                amountPurchases = amountPurchases + Number(transaction.value)
+            }
+            if (transaction.category === "estudos") {
+                amountStudies = amountStudies + Number(transaction.value)
+            }
+
+            total = total + Number(transaction.value);
+
         })
 
         const transactionsByCategory = [
-            { name : "Lazer", amount: amountLazer, category: "leisure" },
-            { name : "Alimentação",amount: amountFood, category: "food" },
+            { name: "Lazer", amount: amountLeisure, category: "leisure", color: "#26195C" },
+            { name: "Alimentação", amount: amountFood, category: "food", color: "#FF872C" },
+            { name: "Salário", amount: amountSalary, category: "salary", color: "#12A454" },
+            { name: "Carro", amount: amountCar, category: "car", color: "#E83F5B" },
+            { name: "Compras", amount: amountPurchases, category: "purchases", color: "#5636D3" },
+            { name: "Estudos", amount: amountStudies, category: "studies", color: "##9C001A" }
         ]
 
         setTransactionByCategory(transactionsByCategory);
@@ -169,13 +199,14 @@ export function Resume() {
 
                 <ContainerCategories>
 
-                    {   transactionByCategory&&
+                    {transactionByCategory &&
 
                         transactionByCategory.map(transaction => (
 
+                            transaction.amount > 0 &&
                             <CardCategory category="purchases">
                                 <TitleCategory>{transaction.name}</TitleCategory>
-                                <AmountCategory><SpanCategory>R$</SpanCategory>{transaction.amount}</AmountCategory>
+                                <AmountCategory><SpanCategory>R$ </SpanCategory>{transaction.amount}</AmountCategory>
                             </CardCategory>
                         ))
                     }
