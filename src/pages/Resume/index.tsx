@@ -42,7 +42,8 @@ const CATEGORIES = [
 export function Resume() {
 
     const [dateSelected, setDateSelected] = useState(new Date());
-    const [transactions, setTransactions] = useState();
+    const [transactions, setTransactions] = useState([]);
+    const [transactionByCategory, setTransactionByCategory] = useState();
 
     function handleDataSelected(type: 'prev' | 'next') {
         if (type === "next") {
@@ -65,9 +66,41 @@ export function Resume() {
         }
     }
 
+    async function startTransactions() {
+        let amountLazer = 0;
+        let amountDiversao = 0;
+        let amountFood = 0;
+        console.log("chegeui aqui")
+
+        transactions.map(transaction => {
+            
+            if (transaction.category === "lazer") {
+                amountLazer = amountLazer + Number(transaction.value);
+                console.log("oi neumar")
+            }
+            if (transaction.category === "alimentação") {
+                amountFood = amountFood + Number(transaction.value);
+            }
+            if (transaction.category === "diversão") {
+                amountDiversao = amountDiversao + Number(transaction.value);
+            }
+        })
+
+        const transactionsByCategory = [
+            { name : "Lazer", amount: amountLazer, category: "leisure" },
+            { name : "Alimentação",amount: amountFood, category: "food" },
+        ]
+
+        setTransactionByCategory(transactionsByCategory);
+    }
+
     useEffect(() => {
         getTransactions();
     }, [dateSelected]);
+
+    useEffect(() => {
+        startTransactions();
+    }, [transactions])
 
     return (
         <Container>
@@ -135,22 +168,18 @@ export function Resume() {
                 </PizzaGraphic>
 
                 <ContainerCategories>
-                    <CardCategory category="purchases">
-                        <TitleCategory>Compras</TitleCategory>
-                        <AmountCategory><SpanCategory>R$</SpanCategory>1.200</AmountCategory>
-                    </CardCategory>
-                    <CardCategory category="car">
-                        <TitleCategory>Carro</TitleCategory>
-                        <AmountCategory><SpanCategory>R$</SpanCategory>7000</AmountCategory>
-                    </CardCategory>
-                    <CardCategory category="food">
-                        <TitleCategory>Alimentação</TitleCategory>
-                        <AmountCategory><SpanCategory>R$</SpanCategory>500</AmountCategory>
-                    </CardCategory>
-                    <CardCategory category="leisure">
-                        <TitleCategory>Lazer</TitleCategory>
-                        <AmountCategory><SpanCategory>R$</SpanCategory>500</AmountCategory>
-                    </CardCategory>
+
+                    {   transactionByCategory&&
+
+                        transactionByCategory.map(transaction => (
+
+                            <CardCategory category="purchases">
+                                <TitleCategory>{transaction.name}</TitleCategory>
+                                <AmountCategory><SpanCategory>R$</SpanCategory>{transaction.amount}</AmountCategory>
+                            </CardCategory>
+                        ))
+                    }
+
                 </ContainerCategories>
             </Main>
 
