@@ -31,13 +31,6 @@ import { VictoryPie } from 'victory';
 import { useEffect, useState } from 'react';
 import { api } from '../../axios';
 
-const CATEGORIES = [
-    { x: 3, y: 6, label: "15%", color: theme.colors.categories.food },
-    { x: 3, y: 6, label: "15%", color: theme.colors.categories.leisure },
-    { x: 2, y: 8, label: "20%", color: theme.colors.categories.car },
-    { x: 1, y: 40, label: "50%", color: theme.colors.categories.purchases },
-]
-
 type TransactionsProps = {
     name: string;
     value: string;
@@ -48,6 +41,7 @@ type TransactionsByCategoryProps = {
     name: string;
     amount: number;
     category: string;
+    color: string;
 }
 
 export function Resume() {
@@ -72,6 +66,7 @@ export function Resume() {
         try {
             const response = await api(`/transaction/bymonth/${dateSelected.toISOString()}`);
             setTransactions(response.data);
+            console.log("cheguei aqui")
             console.log(response.data)
         } catch (error) {
             console.log(error)
@@ -88,6 +83,7 @@ export function Resume() {
         let total = 0
 
         transactions.map(transaction => {
+            console.log(transaction)
 
             if (transaction.category === "lazer") {
                 amountLeisure = amountLeisure + Number(transaction.value);
@@ -109,19 +105,43 @@ export function Resume() {
             }
 
             total = total + Number(transaction.value);
+            console.log("total", total)
 
-        })
+        });
+
+
+
+
+
 
         const transactionsByCategory = [
-            { name: "Lazer", amount: amountLeisure, category: "leisure", color: "#26195C" },
-            { name: "Alimentação", amount: amountFood, category: "food", color: "#FF872C" },
-            { name: "Salário", amount: amountSalary, category: "salary", color: "#12A454" },
-            { name: "Carro", amount: amountCar, category: "car", color: "#E83F5B" },
-            { name: "Compras", amount: amountPurchases, category: "purchases", color: "#5636D3" },
-            { name: "Estudos", amount: amountStudies, category: "studies", color: "##9C001A" }
+            {
+                name: "Lazer", amount: amountLeisure, category: "leisure", color: "#26195C",
+                percentage: `${((amountLeisure / total) * 100).toFixed(0)}%`, total: amountLeisure
+            },
+            {
+                name: "Alimentação", amount: amountFood, category: "food", color: "#FF872C",
+                percentage: `${((amountFood / total) * 100).toFixed(0)}%`, total: amountFood
+            },
+            {
+                name: "Salário", amount: amountSalary, category: "salary", color: "#12A454",
+                percentage: `${((amountSalary / total) * 100).toFixed(0)}%`, total: amountSalary
+            },
+            {
+                name: "Carro", amount: amountCar, category: "car", color: "#E83F5B",
+                percentage: `${((amountCar / total) * 100).toFixed(0)}%`, total: amountCar
+            },
+            {
+                name: "Compras", amount: amountPurchases, category: "purchases", color: "#5636D3",
+                percentage: `${((amountPurchases / total) * 100).toFixed(0)}%`, total: amountPurchases
+            },
+            {
+                name: "Estudos", amount: amountStudies, category: "studies", color: "##9C001A",
+                percentage: `${((amountStudies / total) * 100).toFixed(0)}%`, total: amountStudies
+            }
         ]
 
-        setTransactionByCategory(transactionsByCategory);
+        setTransactionByCategory(transactionsByCategory.filter(transaction => transaction.amount > 0));
     }
 
     useEffect(() => {
@@ -182,8 +202,8 @@ export function Resume() {
                     </ContainerButtonsMonth>
                     <VictoryPie
 
-                        data={CATEGORIES}
-                        colorScale={CATEGORIES.map(item => item.color)}
+                        data={transactionByCategory}
+                        colorScale={transactionByCategory.map(item => item.color)}
                         labelRadius={70}
                         style={{
 
@@ -193,6 +213,8 @@ export function Resume() {
                                 fill: theme.colors.white[100]
                             }
                         }}
+                        x="percentage"
+                        y="total"
 
                     />
                 </PizzaGraphic>
@@ -204,7 +226,7 @@ export function Resume() {
                         transactionByCategory.map(transaction => (
 
                             transaction.amount > 0 &&
-                            <CardCategory category="purchases">
+                            <CardCategory category={transaction.category}>
                                 <TitleCategory>{transaction.name}</TitleCategory>
                                 <AmountCategory><SpanCategory>R$ </SpanCategory>{transaction.amount}</AmountCategory>
                             </CardCategory>
