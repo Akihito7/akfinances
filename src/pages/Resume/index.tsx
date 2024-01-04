@@ -136,7 +136,7 @@ export function Resume() {
                 percentage: `${((amountPurchases / total) * 100).toFixed(0)}%`, total: amountPurchases
             },
             {
-                name: "Estudos", amount: amountStudies, category: "studies", color: "##9C001A",
+                name: "Estudos", amount: amountStudies, category: "studies", color: "#9C001A",
                 percentage: `${((amountStudies / total) * 100).toFixed(0)}%`, total: amountStudies
             }
         ]
