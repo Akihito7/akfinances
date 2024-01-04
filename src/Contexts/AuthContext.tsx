@@ -44,8 +44,8 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
                 email: credentials.email,
                 password: credentials.password
             });
-
-            console.log(user, token)
+            
+            api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
 
             setUser(response.data.user);
             setToken(response.data.token);

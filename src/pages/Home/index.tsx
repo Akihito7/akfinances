@@ -63,7 +63,6 @@ export function Home() {
         let expensiveTotal = 0;
         let lastEntriesTotal = "";
         let lastExpensiveTotal = "";
-        let totalDate = "";
 
         let TOTALOFENTRIES = "";
         let TOTALOFEXPENSIVE = "";
@@ -91,16 +90,11 @@ export function Home() {
         const LastTransactionOfTotal = LASTTRANSACTIONOFENTRIES > LASTTRANSACTIONOFEXPENSIVE ?
             LASTTRANSACTIONOFENTRIES : LASTTRANSACTIONOFEXPENSIVE;
 
-
-            console.log(LastTransactionOfTotal)
-
-        const dayTotal = String(LastTransactionOfTotal).substring(0,2);
-        const monthTotal = String(LastTransactionOfTotal).substring(2,4);
+        const dayTotal = String(LastTransactionOfTotal).substring(0, 2);
+        const monthTotal = String(LastTransactionOfTotal).substring(2, 4);
         const monthNameTotal = new Date(0, Number(monthTotal) - 1).toLocaleString('default', { month: 'long' });
 
         const lastTransactionTotal = `01 a ${dayTotal} de ${monthNameTotal}`
-
-    
 
         const monthNameLastEntries = new Date(0, Number(monthLastEntries) - 1).toLocaleString('default', { month: 'long' });
 
@@ -129,7 +123,9 @@ export function Home() {
     }, [])
 
     useEffect(() => {
-        setHighlightCardsAmount();
+        if (transactions.length > 0) {
+            setHighlightCardsAmount();
+        }
     }, [transactions])
 
     return (
@@ -184,6 +180,8 @@ export function Home() {
             <ContainerTransactions>
 
                 {
+                    transactions &&
+
                     transactions.map((transaction, index) => (
                         <TransactionCard
                             key={index}
