@@ -17,6 +17,8 @@ import {
 } from './style'
 
 import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup"
+import { yupResolver } from '@hookform/resolvers/yup';
 
 type SignupProps = {
     email: string;
@@ -24,17 +26,26 @@ type SignupProps = {
     password: string;
 }
 
+let schema = yup.object().shape({
+    email: yup.string().email("Por favor use e-mail valído").required("Preencha o o e-mail"),
+    name: yup.string().required("Preencha o nome"),
+    password: yup.string().min(8, "A senha deve conter ao minímo 8 caracteres").required("Preencha a senha")
+})
+
 export function Signup() {
 
-    const { control, handleSubmit, reset } = useForm();
+    const { control, handleSubmit, reset } = useForm({
+        resolver : yupResolver(schema)
+    });
+    
     const { signup } = useAuth();
 
     async function handleSignup(userInfo: SignupProps) {
         signup(userInfo)
         reset({
-            name: '', 
-            email: '', 
-            password: '', 
+            name: '',
+            email: '',
+            password: '',
         });
     }
 

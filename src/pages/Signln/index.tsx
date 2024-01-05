@@ -19,16 +19,25 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import { useAuth } from '../../Contexts/AuthContext';
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 type LoginProps = {
     email: string;
     password: string;
 };
 
+let schema = yup.object().shape({
+    email : yup.string().email("Informe um e-mail válido").required("Preencha com um e-mail"),
+    password : yup.string().required("Preencha com uma senha"),
+})
+
 export function Signln() {
 
-    const { control, handleSubmit, reset } = useForm();
+    const { control, handleSubmit, reset } = useForm({
+        resolver : yupResolver(schema)
+    });
 
     const { signln } = useAuth()
 
@@ -39,8 +48,9 @@ export function Signln() {
             const credentials = {
                 email,
                 password
-            };
-            console.log(credentials)
+            }
+
+            console.log("nao cheguei aqui porque os meus campos nao foram preenchidos corretamente");
 
             signln(credentials);
 
@@ -94,6 +104,7 @@ export function Signln() {
                     <Controller
                         name='email'
                         control={control}
+                        defaultValue=''
                         render={({ field: { onChange, value } }) => (
                             <Input
                                 placeholder='E-mail'
@@ -107,6 +118,7 @@ export function Signln() {
 
                     <Controller
                         name='password'
+                        defaultValue=""
                         control={control}
                         render={({ field: { onChange, value } }) => (
                             <Input
