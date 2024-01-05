@@ -11,7 +11,8 @@ interface AuthContextProviderProps {
 type AuthContextProps = {
     signln: (credetials: SignlnProps) => void;
     signup: (UserInfo: SignupProps) => void;
-    user : UserProps;
+    logout(): void;
+    user: UserProps;
 }
 
 type UserProps = {
@@ -44,7 +45,7 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
                 email: credentials.email,
                 password: credentials.password
             });
-            
+
             api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
 
             setUser(response.data.user);
@@ -70,8 +71,13 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
         }
     }
 
+    async function logout() {
+        setUser({} as UserProps);
+        setToken(null);
+    }
+
     return (
-        <AuthContext.Provider value={{ signup, signln, user }}>
+        <AuthContext.Provider value={{ signup, signln, logout, user }}>
             {children}
         </AuthContext.Provider>
     );

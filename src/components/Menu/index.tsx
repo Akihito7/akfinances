@@ -17,7 +17,7 @@ export function Menu({ screenSelected }: { screenSelected: string }) {
     function handleNavigation(navigateTo: string) {
 
         navigate(navigateTo);
-    }
+    };
 
     return (
         <Container>

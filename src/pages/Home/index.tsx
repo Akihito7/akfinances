@@ -45,7 +45,7 @@ export function Home() {
     });
 
 
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
 
     async function getTransactions() {
         try {
@@ -143,7 +143,7 @@ export function Home() {
                         </ContainerTextImage>
                     </ContainerImage>
 
-                    <ButtonLogout>
+                    <ButtonLogout onClick={logout}>
                         <ImageLogout
                             src="power.svg"
                             alt="botão de logout"
