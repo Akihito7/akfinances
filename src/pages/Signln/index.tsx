@@ -113,6 +113,7 @@ export function Signln() {
                                 placeholder='Password'
                                 onChange={(event) => onChange(event.target.value)}
                                 value={value}
+                                type='password'
 
                             />
                         )}

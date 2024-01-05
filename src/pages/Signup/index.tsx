@@ -85,6 +85,7 @@ export function Signup() {
                                 value={value}
                                 onChange={(event) => onChange(event.target.value)}
                                 placeholder='Password'
+                                type='password'
                             />
                         )}
                     />
