@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 
-export const Container = styled.input`
+
+export const InputController = styled.div`
+
+
+`
+export const InputCustom = styled.input`
 
 
 width: 100%;
@@ -24,5 +29,15 @@ font-size: 1.6rem;
 &::placeholder{
     color: ${theme.colors.grey[100]};
 }
+
+`
+
+export const ErrorMessage = styled.p`
+
+margin: 5px 0 0;
+font-family: 'Poppins', sans-serif;
+font-weight: 600;
+font-size: 1.4rem;
+color: ${theme.colors.red[100]};
 
 `

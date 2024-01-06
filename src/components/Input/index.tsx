@@ -1,15 +1,25 @@
-import { Container } from "./style";
+import { InputCustom, InputController, ErrorMessage } from "./style";
 import { InputHTMLAttributes } from 'react';
 
 type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
     placeholder: string;
+    errorMessage: string | null;
 };
 
-export function Input({ placeholder, ...rest }: PropsInput) {
+export function Input({ errorMessage = null, placeholder, ...rest }: PropsInput) {
+
+    const isInvalid = !!errorMessage || false;
     return (
-        <Container
-            placeholder={placeholder}
-            {...rest}
-        />
+        <InputController>
+            <InputCustom
+                placeholder={placeholder}
+                {...rest}
+            />
+
+            {
+                isInvalid ? <ErrorMessage>{errorMessage}</ErrorMessage> : null
+                
+            }
+        </InputController>
     )
 }

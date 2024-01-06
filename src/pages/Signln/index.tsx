@@ -14,6 +14,7 @@ import {
     ButtonLogin,
     ForgetPassword,
     DontHaveAccount,
+
 } from './style'
 
 import { Controller, useForm } from 'react-hook-form';
@@ -29,14 +30,14 @@ type LoginProps = {
 };
 
 let schema = yup.object().shape({
-    email : yup.string().email("Informe um e-mail válido").required("Preencha com um e-mail"),
-    password : yup.string().required("Preencha com uma senha"),
+    email: yup.string().email("Informe um e-mail válido").required("Preencha com um e-mail"),
+    password: yup.string().required("Preencha com uma senha"),
 })
 
 export function Signln() {
 
-    const { control, handleSubmit, reset } = useForm({
-        resolver : yupResolver(schema)
+    const { control, handleSubmit, reset, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
     });
 
     const { signln } = useAuth()
@@ -49,8 +50,6 @@ export function Signln() {
                 email,
                 password
             }
-
-            console.log("nao cheguei aqui porque os meus campos nao foram preenchidos corretamente");
 
             signln(credentials);
 
@@ -105,14 +104,20 @@ export function Signln() {
                         name='email'
                         control={control}
                         defaultValue=''
-                        render={({ field: { onChange, value } }) => (
-                            <Input
-                                placeholder='E-mail'
-                                onChange={(event) => onChange(event.target.value)}
-                                value={value}
+                        render={({ field: { onChange, value } }) => {
 
-                            />
-                        )}
+                            const errorMessage = errors.email?.message ? errors.email.message : null;
+
+                            return (
+                                <Input
+                                    errorMessage={errorMessage}
+                                    placeholder='E-mail'
+                                    onChange={(event) => onChange(event.target.value)}
+                                    value={value}
+
+                                />
+                            )
+                        }}
 
                     />
 
@@ -120,15 +125,20 @@ export function Signln() {
                         name='password'
                         defaultValue=""
                         control={control}
-                        render={({ field: { onChange, value } }) => (
-                            <Input
-                                placeholder='Password'
-                                onChange={(event) => onChange(event.target.value)}
-                                value={value}
-                                type='password'
+                        render={({ field: { onChange, value } }) => {
+                            const errorMessage = errors.password?.message ? errors.password.message : null;
 
-                            />
-                        )}
+                            return (
+                                <Input
+                                    errorMessage={errorMessage}
+                                    placeholder='Password'
+                                    onChange={(event) => onChange(event.target.value)}
+                                    value={value}
+                                    type='password'
+
+                                />
+                            )
+                        }}
 
                     />
 

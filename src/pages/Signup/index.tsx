@@ -34,10 +34,10 @@ let schema = yup.object().shape({
 
 export function Signup() {
 
-    const { control, handleSubmit, reset } = useForm({
-        resolver : yupResolver(schema)
+    const { control, handleSubmit, reset, formState : { errors } } = useForm({
+        resolver: yupResolver(schema)
     });
-    
+
     const { signup } = useAuth();
 
     async function handleSignup(userInfo: SignupProps) {
