@@ -34,7 +34,7 @@ let schema = yup.object().shape({
 
 export function Signup() {
 
-    const { control, handleSubmit, reset, formState : { errors } } = useForm({
+    const { control, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
 
@@ -68,37 +68,58 @@ export function Signup() {
                         name='name'
                         control={control}
 
-                        render={({ field: { onChange, value } }) => (
-                            <Input
-                                value={value}
-                                onChange={(event) => onChange(event.target.value)}
-                                placeholder='Nome'
-                            />
-                        )}
+                        render={({ field: { onChange, value } }) => {
+
+                            const errorMessage = errors.name?.message ? errors.name.message : null;
+
+                            return (
+                                <Input
+                                    errorMessage={errorMessage}
+                                    value={value}
+                                    onChange={(event) => onChange(event.target.value)}
+                                    placeholder='Nome'
+                                />
+
+                            )
+                        }}
                     />
 
                     <Controller
                         name='email'
                         control={control}
-                        render={({ field: { onChange, value } }) => (
-                            <Input
-                                value={value}
-                                onChange={(event) => onChange(event.target.value)}
-                                placeholder='E-mail'
-                            />
-                        )}
+                        render={({ field: { onChange, value } }) => {
+
+                            const errorMessage = errors.email?.message ? errors.email.message : null;
+
+                            return (
+                                <Input
+                                    errorMessage={errorMessage}
+                                    value={value}
+                                    onChange={(event) => onChange(event.target.value)}
+                                    placeholder='E-mail'
+                                />
+
+                            )
+                        }}
                     />
                     <Controller
                         name='password'
                         control={control}
-                        render={({ field: { onChange, value } }) => (
-                            <Input
-                                value={value}
-                                onChange={(event) => onChange(event.target.value)}
-                                placeholder='Password'
-                                type='password'
-                            />
-                        )}
+                        render={({ field: { onChange, value } }) => {
+
+                            const errorMessage = errors.password?.message ? errors.password.message : null;
+
+                            return (
+                                <Input
+                                    errorMessage={errorMessage}
+                                    value={value}
+                                    onChange={(event) => onChange(event.target.value)}
+                                    placeholder='Password'
+                                    type='password'
+                                />
+                            )
+                        }}
+
                     />
 
                     <ButtonRegister onClick={handleSubmit(handleSignup)}>
