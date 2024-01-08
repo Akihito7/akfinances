@@ -4,6 +4,8 @@ import { theme } from "../../theme";
 
 export const InputController = styled.div`
 
+width: 100%;
+background-color: ${theme.colors.white[300]};
 
 `
 export const InputCustom = styled.input`

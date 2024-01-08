@@ -3,12 +3,13 @@ import { InputHTMLAttributes } from 'react';
 
 type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
     placeholder: string;
-    errorMessage: string | null;
+    errorMessage: string | null
 };
 
 export function Input({ errorMessage = null, placeholder, ...rest }: PropsInput) {
 
     const isInvalid = !!errorMessage || false;
+    
     return (
         <InputController>
             <InputCustom

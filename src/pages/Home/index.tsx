@@ -16,12 +16,12 @@ import {
     ImageLogout,
     OlaText,
     NameText,
-    GenericText,
 
 } from "./style"
 
 import { api } from "../../axios"
 import { useAuth } from "../../Contexts/AuthContext"
+import { appError } from "../../utils/appError"
 
 export function Home() {
 
@@ -54,6 +54,12 @@ export function Home() {
 
         } catch (error) {
             console.log(error)
+
+            if (error instanceof appError) {
+                return alert(error.message)
+            }
+
+            return alert("Erro interno!");
         }
     };
 
@@ -139,7 +145,7 @@ export function Home() {
                         />
                         <ContainerTextImage>
                             <OlaText>Olá</OlaText>
-                            <NameText>Xamã</NameText>
+                            <NameText>{user.name}</NameText>
                         </ContainerTextImage>
                     </ContainerImage>
 

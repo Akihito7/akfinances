@@ -48,9 +48,9 @@ export function Register() {
     async function handleRegisterTransaction(transaction: {}) {
 
         const today = new Date();
-        const day = today.getDate();
-        let month = today.getMonth() + 1;
-        let year = today.getFullYear();
+        const day = String(today.getDate()).padStart(2, "0");
+        let month = String(today.getMonth() + 1).padStart(2, "0");
+        let year = today.getFullYear()
 
         try {
             await api.post("/transaction/", {
@@ -102,6 +102,7 @@ export function Register() {
                             render={({ field: { onChange, value } }) => (
 
                                 <Input
+                                    errorMessage={null}
                                     placeholder='Nome'
                                     onChange={(event) => onChange(event.target.value)}
                                     value={value}
@@ -115,6 +116,7 @@ export function Register() {
                             render={({ field: { onChange, value } }) => (
 
                                 <Input
+                                    errorMessage={null}
                                     placeholder='Preço'
                                     onChange={(event) => onChange(event.target.value)}
                                     value={value}

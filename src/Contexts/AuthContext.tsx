@@ -46,7 +46,6 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
                 password: credentials.password
             });
 
-            api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
 
             setUser(response.data.user);
             setToken(response.data.token);

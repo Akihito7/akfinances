@@ -40,7 +40,6 @@ justify-content: space-between;
 
 export const ContainerImage = styled.div`
 
-width: 15rem;
 display: flex;
 gap: 20px;
 

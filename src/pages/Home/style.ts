@@ -86,7 +86,6 @@ justify-content: space-between;
 
 export const ContainerImage = styled.div`
 
-width: 15rem;
 display: flex;
 gap: 20px;
 
@@ -97,6 +96,7 @@ export const ContainerTextImage = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: flex-end;
+
 
 `
 export const Image = styled.img`

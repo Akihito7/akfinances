@@ -30,6 +30,7 @@ import { ptBR } from "date-fns/locale";
 import { VictoryPie } from 'victory';
 import { useEffect, useState } from 'react';
 import { api } from '../../axios';
+import { useAuth } from '../../Contexts/AuthContext';
 
 type TransactionsProps = {
     name: string;
@@ -46,25 +47,27 @@ type TransactionsByCategoryProps = {
 
 export function Resume() {
 
-    const [dateSelected, setDateSelected] = useState(new Date());
+    const [dateSelected, setDateSelected] = useState(new Date().toISOString());
     const [transactions, setTransactions] = useState<TransactionsProps[]>([]);
     const [transactionByCategory, setTransactionByCategory] = useState<TransactionsByCategoryProps[]>([]);
+
+    const { user } = useAuth()
 
     function handleDataSelected(type: 'prev' | 'next') {
         if (type === "next") {
             const nextMonth = addMonths(dateSelected, 1);
             console.log(nextMonth);
-            setDateSelected(nextMonth);
+            setDateSelected(nextMonth.toISOString());
         } else {
             const prevDate = subMonths(dateSelected, 1);
             console.log(prevDate);
-            setDateSelected(prevDate)
+            setDateSelected(prevDate.toISOString());
         }
     };
 
     async function getTransactions() {
         try {
-            const response = await api(`/transaction/bymonth/${dateSelected.toISOString()}`);
+            const response = await api(`/transaction/bymonth/${dateSelected}`);
             setTransactions(response.data);
             console.log("cheguei aqui")
             console.log(response.data)
@@ -109,11 +112,6 @@ export function Resume() {
 
         });
 
-
-
-
-
-
         const transactionsByCategory = [
             {
                 name: "Lazer", amount: amountLeisure, category: "leisure", color: "#26195C",
@@ -146,6 +144,7 @@ export function Resume() {
 
     useEffect(() => {
         getTransactions();
+        console.log(dateSelected)
     }, [dateSelected]);
 
     useEffect(() => {
@@ -164,7 +163,7 @@ export function Resume() {
 
                         <ContainerTextImage>
                             <OlaText>Olá</OlaText>
-                            <NameText>Xamã</NameText>
+                            <NameText>{user.name}</NameText>
                         </ContainerTextImage>
                     </ContainerImage>
 
