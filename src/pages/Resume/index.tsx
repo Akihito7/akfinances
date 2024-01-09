@@ -20,6 +20,7 @@ import {
     TitleCategory,
     AmountCategory,
     SpanCategory,
+    NoRegister,
 } from './style'
 import { Menu } from '../../components/Menu';
 import { theme } from '../../theme';
@@ -69,8 +70,7 @@ export function Resume() {
         try {
             const response = await api(`/transaction/bymonth/${dateSelected}`);
             setTransactions(response.data);
-            console.log("cheguei aqui")
-            console.log(response.data)
+            console.log("TRANSAÇÕES => ", transactions);
         } catch (error) {
             console.log(error)
         }
@@ -144,7 +144,6 @@ export function Resume() {
 
     useEffect(() => {
         getTransactions();
-        console.log(dateSelected)
     }, [dateSelected]);
 
     useEffect(() => {
@@ -199,23 +198,31 @@ export function Resume() {
                             alt='seta para a esquerda'
                         />
                     </ContainerButtonsMonth>
-                    <VictoryPie
+                    {
+                        
+                         transactions.length > 0 ?
 
-                        data={transactionByCategory}
-                        colorScale={transactionByCategory.map(item => item.color)}
-                        labelRadius={70}
-                        style={{
+                        <VictoryPie
 
-                            labels: {
-                                fontSize: 18,
-                                fontWeight: 'bold',
-                                fill: theme.colors.white[100]
-                            }
-                        }}
-                        x="percentage"
-                        y="total"
+                            data={transactionByCategory}
+                            colorScale={transactionByCategory.map(item => item.color)}
+                            labelRadius={70}
+                            style={{
 
-                    />
+                                labels: {
+                                    fontSize: 18,
+                                    fontWeight: 'bold',
+                                    fill: theme.colors.white[100]
+                                }
+                            }}
+                            x="percentage"
+                            y="total"
+
+                        />
+                        :
+
+                        <NoRegister>Sem registros para esse mês</NoRegister>
+                    }
                 </PizzaGraphic>
 
                 <ContainerCategories>
@@ -231,6 +238,7 @@ export function Resume() {
                             </CardCategory>
                         ))
                     }
+
 
                 </ContainerCategories>
             </Main>

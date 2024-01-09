@@ -210,3 +210,15 @@ font-size: 1.6rem;
 color: ${theme.colors.blue[100]};
 
 `
+export const NoRegister = styled.h1`
+
+font-family: 'Poppins', sans-serif;
+font-weight: 500;
+font-size: 2rem;
+color: ${theme.colors.blue[100]};
+align-self: center;
+position: absolute;
+right: 40%;
+bottom: 40%;
+
+`

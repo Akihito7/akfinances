@@ -94,7 +94,7 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
             saveCredentialsAsyncStorage(credentials.email, credentials.password);
 
         } catch (error) {
-            alert(error);
+            console.log(error);
         }
     }
 
