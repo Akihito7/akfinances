@@ -38,7 +38,7 @@ export function Register() {
     const navigate = useNavigate();
 
     const { control, handleSubmit, reset } = useForm();
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
 
     function handleCategoryOpen() {
         if (categoryOpen) setCategoryOpen(false)
@@ -84,7 +84,10 @@ export function Register() {
                         />
                     </Button>
 
-                    <Button>
+                    <Button onClick={() => {
+                        logout()
+                        navigate("/")
+                    }}>
                         <Image
                             src="power.svg"
                             alt="botão de logout"

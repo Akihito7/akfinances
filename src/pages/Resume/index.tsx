@@ -32,6 +32,7 @@ import { VictoryPie } from 'victory';
 import { useEffect, useState } from 'react';
 import { api } from '../../axios';
 import { useAuth } from '../../Contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 type TransactionsProps = {
     name: string;
@@ -51,8 +52,9 @@ export function Resume() {
     const [dateSelected, setDateSelected] = useState(new Date().toISOString());
     const [transactions, setTransactions] = useState<TransactionsProps[]>([]);
     const [transactionByCategory, setTransactionByCategory] = useState<TransactionsByCategoryProps[]>([]);
+    const navigate = useNavigate();
 
-    const { user } = useAuth()
+    const { user, logout } = useAuth()
 
     function handleDataSelected(type: 'prev' | 'next') {
         if (type === "next") {
@@ -70,7 +72,6 @@ export function Resume() {
         try {
             const response = await api(`/transaction/bymonth/${dateSelected}`);
             setTransactions(response.data);
-            console.log("TRANSAÇÕES => ", transactions);
         } catch (error) {
             console.log(error)
         }
@@ -166,7 +167,12 @@ export function Resume() {
                         </ContainerTextImage>
                     </ContainerImage>
 
-                    <ButtonLogout>
+                    <ButtonLogout
+                    onClick={() => {
+                        logout()
+                        navigate("/")
+                    }}
+                    >
                         <ImageLogout
                             src="power.svg"
                             alt="botão de logout"
@@ -219,6 +225,7 @@ export function Resume() {
                             y="total"
 
                         />
+
                         :
 
                         <NoRegister>Sem registros para esse mês</NoRegister>

@@ -1,5 +1,6 @@
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
 import { api } from "../axios";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext({} as AuthContextProps);
 
@@ -36,6 +37,7 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
 
     const [user, setUser] = useState({} as UserProps);
     const [token, setToken] = useState(null);
+    
 
     const nameAsyncStorage = "@akfinances/user"
 
@@ -72,9 +74,11 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
         }
     };
 
-    async function logout() {
+    function logout() {
         setUser({} as UserProps);
         setToken(null);
+        localStorage.removeItem(nameAsyncStorage);
+        
     };
 
     async function tryLoginWithAsyncStorage() {
