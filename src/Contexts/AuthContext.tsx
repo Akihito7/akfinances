@@ -1,6 +1,5 @@
-import { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, useContext, ReactNode, useState, useEffect } from "react";
 import { api } from "../axios";
-
 
 const AuthContext = createContext({} as AuthContextProps);
 
@@ -36,7 +35,9 @@ type SignupProps = {
 function AuthContextProvider({ children }: AuthContextProviderProps) {
 
     const [user, setUser] = useState({} as UserProps);
-    const [token, setToken] = useState(null)
+    const [token, setToken] = useState(null);
+
+    const nameAsyncStorage = "@akfinances/user"
 
     async function signln(credentials: SignlnProps) {
 
@@ -46,16 +47,17 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
                 password: credentials.password
             });
 
-
+            api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
             setUser(response.data.user);
             setToken(response.data.token);
+            saveCredentialsAsyncStorage(credentials.email, credentials.password);
 
 
         } catch (error) {
             console.log(error)
         }
 
-    }
+    };
 
     async function signup(userInfo: SignupProps) {
         try {
@@ -68,12 +70,48 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
         } catch (error) {
             console.log(error)
         }
-    }
+    };
 
     async function logout() {
         setUser({} as UserProps);
         setToken(null);
+    };
+
+    async function tryLoginWithAsyncStorage() {
+        try {
+
+            const credentials = getCredentialsAsyncStorage();
+            if (!credentials) return;
+
+            const response = await api.post("/auth/signln", {
+                email: credentials.email,
+                password: credentials.password
+            });
+
+            api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
+            setUser(response.data.user);
+            setToken(response.data.token);
+            saveCredentialsAsyncStorage(credentials.email, credentials.password);
+
+        } catch (error) {
+            alert(error);
+        }
     }
+
+    function saveCredentialsAsyncStorage(email: string, password: string) {
+        localStorage.setItem(nameAsyncStorage, JSON.stringify({ email, password }));
+    }
+
+    function getCredentialsAsyncStorage() {
+        const credentials = localStorage.getItem(nameAsyncStorage);
+        const credentialsJsonParse = credentials ? JSON.parse(credentials) : null;
+        return credentialsJsonParse;
+    }
+
+
+    useEffect(() => {
+        tryLoginWithAsyncStorage()
+    }, [])
 
     return (
         <AuthContext.Provider value={{ signup, signln, logout, user }}>
