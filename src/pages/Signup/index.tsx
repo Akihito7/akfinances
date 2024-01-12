@@ -2,6 +2,7 @@ import { useAuth } from '../../Contexts/AuthContext';
 import { Input } from '../../components/Input'
 import {
     Container,
+    ContainerLogoMobile,
     ContainerLogo,
     Logo,
     TextLogo,
@@ -51,6 +52,15 @@ export function Signup() {
 
     return (
         <Container>
+
+            <ContainerLogoMobile>
+                <Logo src="Logo.png">
+
+                </Logo>
+                <TextLogo>
+                    Akfinances
+                </TextLogo>
+            </ContainerLogoMobile>
             <ContainerLogin>
                 <Header>
                     <TextLogin>
