@@ -6,6 +6,7 @@ import {
     Container,
     Header,
     ContainerHeader,
+    ContainerSlider,
     ContainerImage,
     ContainerTextImage,
     ExtendedArea,
@@ -23,7 +24,24 @@ import { api } from "../../axios"
 import { useAuth } from "../../Contexts/AuthContext"
 import { appError } from "../../utils/appError"
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 export function Home() {
+
+    const handleResize = () => {
+        setShouldRenderSlider(window.innerWidth <= 787);
+      };
+
+    const settings = {
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        variableWidth: true,
+        arrows : false,
+    };
 
     const [transactions, setTransactions] = useState([]);
     const [HighLightAmount, setHighLightAmount] = useState({
@@ -37,13 +55,17 @@ export function Home() {
             amount: '0'
         }
     });
+    const [shouldRenderSlider, setShouldRenderSlider] = useState(
+        window.innerWidth <= 787
+      );
+    
+
 
     const [LastTransaction, setLastTransaction] = useState({
         entriesTotal: "Nenhuma entrada ainda",
         expensiveTotal: "Nenhuma saida ainda",
         total: "Nenhuma transação ainda"
     });
-
 
     const { user, logout } = useAuth();
 
@@ -134,6 +156,15 @@ export function Home() {
         }
     }, [transactions])
 
+    useEffect(() => {
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     return (
         <Container>
             <Header>
@@ -157,28 +188,65 @@ export function Home() {
                     </ButtonLogout>
                 </ContainerHeader>
 
-                <ExtendedArea>
-                    <HighlightCard
-                        title="Entradas"
-                        type="up"
-                        amount={HighLightAmount.entriesTotal.amount}
-                        lastTransaction={LastTransaction.entriesTotal}
-                    />
+                {
+                    shouldRenderSlider ?
+                        <ExtendedArea>
+                            <ContainerSlider>
+                                <Slider {...settings}>
+                                    <HighlightCard
+                                        title="Entradas"
+                                        type="up"
+                                        amount={HighLightAmount.entriesTotal.amount}
+                                        lastTransaction={LastTransaction.entriesTotal}
+                                    />
 
-                    <HighlightCard
-                        title="Saídas"
-                        type="down"
-                        amount={HighLightAmount.expensiveTotal.amount}
-                        lastTransaction={LastTransaction.expensiveTotal}
-                    />
+                                    <HighlightCard
+                                        title="Saídas"
+                                        type="down"
+                                        amount={HighLightAmount.expensiveTotal.amount}
+                                        lastTransaction={LastTransaction.expensiveTotal}
+                                    />
 
-                    <HighlightCard
-                        title="Total"
-                        type="total"
-                        amount={HighLightAmount.total.amount}
-                        lastTransaction={LastTransaction.total}
-                    />
-                </ExtendedArea>
+                                    <HighlightCard
+                                        title="Total"
+                                        type="total"
+                                        amount={HighLightAmount.total.amount}
+                                        lastTransaction={LastTransaction.total}
+                                    />
+                                </Slider>
+                            </ContainerSlider>
+                        </ExtendedArea>
+
+                        :
+                        <ExtendedArea>
+
+                            <HighlightCard
+                                title="Entradas"
+                                type="up"
+                                amount={HighLightAmount.entriesTotal.amount}
+                                lastTransaction={LastTransaction.entriesTotal}
+                            />
+
+                            <HighlightCard
+                                title="Saídas"
+                                type="down"
+                                amount={HighLightAmount.expensiveTotal.amount}
+                                lastTransaction={LastTransaction.expensiveTotal}
+                            />
+
+                            <HighlightCard
+                                title="Total"
+                                type="total"
+                                amount={HighLightAmount.total.amount}
+                                lastTransaction={LastTransaction.total}
+                            />
+                        </ExtendedArea>
+
+
+                }
+
+
+
             </Header>
 
             <TransactionList>Lista de transações</TransactionList>

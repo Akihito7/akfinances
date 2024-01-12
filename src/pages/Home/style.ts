@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
+import Slider from "react-slick";
 
 export const Container = styled.div`
 
@@ -83,6 +84,24 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 `
+
+export const ContainerSlider = styled.div`
+
+width: 41rem;
+
+@media screen and (min-width: 486px) and (max-width: 786px) {
+    width: 40rem;
+    height: 10rem;
+
+}
+
+@media screen and (max-width: 485px){
+    width: 31rem;
+}
+
+`
+
+
 
 export const ContainerImage = styled.div`
 
