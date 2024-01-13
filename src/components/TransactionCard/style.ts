@@ -47,6 +47,10 @@ font-family: 'Poppins', sans-serif;
 font-weight: 500;
 color: ${theme.colors.blue[100]};
 
+@media screen and (max-width: 485px){
+  font-size: 1.4rem;
+}
+
 `
 export const Amount = styled.h1<AmountProps>`
 flex: 1;
@@ -55,7 +59,11 @@ font-family: 'Poppins', sans-serif;
 font-weight: 400;
 color : ${({ type }) => (
         type === "income" ? theme.colors.green[100] : theme.colors.red[100]
-    )}
+    )};
+
+@media screen and (max-width: 485px){
+  font-size: 1.8rem;
+}
 `
 export const Footer = styled.div`
 display: flex;
@@ -79,10 +87,22 @@ font-size: 1.4rem;
 font-family: 'Poppins', sans-serif;
 font-weight: 400;
 color: ${theme.colors.grey[100]};
+
+@media screen and (max-width: 485px){
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 485px){
+  font-size: 1.2rem;
+}
 `
 export const Date = styled.div`
 font-size: 1.4rem;
 font-family: 'Poppins', sans-serif;
 font-weight: 400;
 color: ${theme.colors.grey[100]};
+
+@media screen and (max-width: 485px){
+  font-size: 1.2rem;
+}
 `

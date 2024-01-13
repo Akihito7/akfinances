@@ -17,9 +17,10 @@ import {
     AlreadyHaveAccount,
 } from './style'
 
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, } from "react-hook-form";
 import * as yup from "yup"
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from "react-router-dom"
 
 type SignupProps = {
     email: string;
@@ -34,6 +35,8 @@ let schema = yup.object().shape({
 })
 
 export function Signup() {
+
+    const navigate = useNavigate();
 
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -138,7 +141,11 @@ export function Signup() {
 
                 </ContainerInputs>
 
-                <AlreadyHaveAccount>
+                <AlreadyHaveAccount
+                onClick={() => {
+                    navigate("/")
+                }}
+                >
                     Já tem uma conta? Logar!
                 </AlreadyHaveAccount>
             </ContainerLogin>
