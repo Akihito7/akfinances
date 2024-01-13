@@ -7,6 +7,7 @@ import {
     Header,
     ContainerHeader,
     ContainerSlider,
+    ContainerSliderTransactions,
     ContainerImage,
     ContainerTextImage,
     ExtendedArea,
@@ -32,7 +33,7 @@ export function Home() {
 
     const handleResize = () => {
         setShouldRenderSlider(window.innerWidth <= 787);
-      };
+    };
 
     const settings = {
         infinite: true,
@@ -40,8 +41,21 @@ export function Home() {
         slidesToShow: 1,
         slidesToScroll: 1,
         variableWidth: true,
-        arrows : false,
+        arrows: false,
     };
+
+    const settingsTransactions = {
+        infinite: false,
+        speed: 500,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        variableHeight: true,
+        arrows: false,
+        vertical: true,
+        verticalSwiping: true,
+
+    };
+
 
     const [transactions, setTransactions] = useState([]);
     const [HighLightAmount, setHighLightAmount] = useState({
@@ -57,8 +71,8 @@ export function Home() {
     });
     const [shouldRenderSlider, setShouldRenderSlider] = useState(
         window.innerWidth <= 787
-      );
-    
+    );
+
 
 
     const [LastTransaction, setLastTransaction] = useState({
@@ -251,19 +265,42 @@ export function Home() {
 
             <TransactionList>Lista de transações</TransactionList>
 
-            <ContainerTransactions>
+            {
+                shouldRenderSlider ?
 
-                {
-                    transactions &&
+                    <ContainerSliderTransactions>
+                        <Slider {...settingsTransactions}>
+                            {
+                            transactions &&
 
-                    transactions.map((transaction, index) => (
-                        <TransactionCard
-                            key={index}
-                            transaction={transaction}
-                        />
-                    ))
-                }
-            </ContainerTransactions>
+                            transactions.map((transaction, index) => (
+                                <TransactionCard
+                                    key={index}
+                                    transaction={transaction}
+                                />
+                            ))
+                        }
+                        </Slider>
+
+                    </ContainerSliderTransactions>
+
+
+                    :
+
+                    <ContainerTransactions>
+
+                        {
+                            transactions &&
+
+                            transactions.map((transaction, index) => (
+                                <TransactionCard
+                                    key={index}
+                                    transaction={transaction}
+                                />
+                            ))
+                        }
+                    </ContainerTransactions>
+            }
 
             <Menu screenSelected="home" />
         </Container >

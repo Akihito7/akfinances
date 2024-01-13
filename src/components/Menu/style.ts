@@ -24,10 +24,23 @@ display: flex;
 align-items: center;
 justify-content: space-around;
 
+@media screen and (min-width: 486px) and (max-width: 786px) {
+width: 100vw;
+  top : 92%;
+  left: 0;
+  transform: translateX(0);
+}
+
+
+@media screen and (max-width: 485px){
+  width: 100vw;
+  top : 92%;
+  left: 0;
+  transform: translateX(0);
+
+}
 `
-
 export const ContainerIcon = styled.div`
-
 display: flex;
 gap: 1rem;
 transition : all 300ms;
@@ -38,11 +51,14 @@ transition : all 300ms;
 }
 
 `
-
 export const Title = styled.h1<PropsSelected>`
-
 font-family: "Poppins", sans-serif;
 font-size: 1.6rem;
-color : ${({ selected }) => selected ? theme.colors.orange[100] : theme.colors.blue[100]}
+color : ${({ selected }) => selected ? theme.colors.orange[100] : theme.colors.blue[100]};
 
+
+
+@media screen and (max-width: 485px){
+    display: none;
+}
 `

@@ -20,8 +20,25 @@ transition: all 300ms;
     cursor: pointer;
 }
 
+@media screen and (min-width: 486px) and (max-width: 786px) {
+  width: auto;
+  height: 11rem;
+  margin-bottom: 5px;
 
+  &:hover{
+    transform: scale(1);
+}
+}
 
+@media screen and (max-width: 485px){
+  width: auto;
+  height: 11rem;
+  margin-bottom: 5px;
+
+  &:hover{
+    transform: scale(1);
+}
+}
 `
 export const Title = styled.h1`
 
@@ -40,14 +57,12 @@ color : ${({ type }) => (
         type === "income" ? theme.colors.green[100] : theme.colors.red[100]
     )}
 `
-
 export const Footer = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
 gap : 1rem;
 `
-
 export const ContainerIcon = styled.div`
 display: flex;
 align-items: center;

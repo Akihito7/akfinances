@@ -117,12 +117,12 @@ font-size: 2.4rem;
 `
 export const LastTransaction = styled.p<TypeProps>`
 font-family: 'Poppins', sans-serif;
-font-size: 1.2;
+font-size: 1.2rem;
 font-weight: 400;
 color : ${({ type }) => (type === 'total' ? theme.colors.white[100] : theme.colors.blue[100])};
 line-height: 1;
 
 @media screen and (max-width: 485px){
-font-size: 1rem;
+font-size: .6rem;
 }
 `
