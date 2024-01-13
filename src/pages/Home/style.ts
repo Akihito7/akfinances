@@ -119,13 +119,15 @@ display: flex;
 flex-direction: column;
 
 align-items: center;
-height: 30rem;
+height: 40rem;
 width: 30rem;
-
 
 @media screen and (min-width: 486px) and (max-width: 786px) {
   width: 40rem;
+
 }
+
+
 `
 export const ContainerHeader = styled.div`
 display: flex;

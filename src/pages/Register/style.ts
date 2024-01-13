@@ -42,7 +42,6 @@ overflow-x: hidden;
 
 
 `
-
 export const Header = styled.div`
 
 height: 35vh;
@@ -56,21 +55,28 @@ flex-direction: column;
 
 overflow: visible;
 
-`
+@media screen and (max-width: 485px){
+    padding: 4rem 0;
+}   
 
+
+`
 export const ContainerHeader = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
-`
 
+@media screen and (max-width: 485px){
+    width: 100vw;
+    padding: 0 4rem;
+}   
+
+`
 export const Image = styled.img`
 
 width: 28px;
 height: 28px;
 `
-
-
 export const Button = styled.button`
 background: none;
 border: none;
@@ -84,9 +90,6 @@ transition: all 300ms;
     transform: scale(1.1);
 }
 `
-
-
-
 export const ExtendedArea = styled.div`
 flex: 1; 
 display: flex;
@@ -95,8 +98,6 @@ padding: .5rem 5rem;
 margin-top: 7rem;
 
 `
-
-
 export const ContainerForm = styled.div`
 
 width: 50rem;
@@ -108,8 +109,11 @@ display: flex;
 flex-direction: column;
 align-items: center;
 gap: 1rem;
-`
 
+@media screen and (min-width: 486px) and (max-width: 786px){
+  padding: 6rem 4rem;
+}
+`
 export const Title = styled.h1`
 
 font-family: 'Poppins', sans-serif;
@@ -119,7 +123,6 @@ margin-bottom: 3rem;
 
 
 `
-
 export const ContainerButtons = styled.div`
 
 width: 100%;
@@ -127,8 +130,8 @@ height: 5rem;
 gap: 20px;
 
 display: flex;
-`
 
+`
 export const ButtonTypeTransaction = styled.div<ButtonTypeProps>`
 
 width: 50%;
@@ -138,7 +141,6 @@ background-color: ${theme.colors.white[100]};
 border : 2px solid ${({ selected, color}) => (
   selected ? theme.colors[color][100] : theme.colors.white[200]
 )};
-
 
 font-family: 'Poppins', sans-serif;
 font-size: 1.6rem;
@@ -153,15 +155,16 @@ transition : all 300ms;
     transform: scale(1.1);
     cursor: pointer;
 }
+
+@media screen and (max-width: 485px){
+  font-size: 1rem;
+  padding: 0 2rem;
+}
 `
-
 export const ButtonIcon = styled.img`
-
 width: 3rem;
 height: 3rem;
-
 `
-
 export const ContainerCategory = styled.div`
 
 width: 100%;
@@ -191,14 +194,22 @@ justify-content: start;
     cursor: pointer;
 }
 
-`
+@media screen and (min-width: 486px) and (max-width: 786px){
+  width: 40rem;
+  height: 4rem;
+}
 
+
+@media screen and (max-width: 485px){
+  height: 4rem;
+}
+
+`
 export const ContainerButtonsCategory = styled.div`
 
 padding: 1rem 0 0;
 
 `
-
 export const ButtonOfCategory = styled.button`
 
 width: 100%;
@@ -224,15 +235,20 @@ transition: all 300ms;
   opacity: .7;
   cursor: pointer;
 }
-`
 
+
+@media screen and (max-width: 485px){
+
+}
+
+
+`
 export const IconCategory = styled.img`
 
 width: 2.8rem;
 height: 2.8rem;
 
 `
-
 export const ButtonSend = styled.button`
 
 width: 100%;
@@ -254,6 +270,16 @@ transition : all 300ms;
 &:hover{
     transform: scale(1.1);
     cursor: pointer;
+}
+
+@media screen and (min-width: 486px) and (max-width: 786px){
+  width: 40rem;
+  height: 4rem;
+}
+
+
+@media screen and (max-width: 485px){
+  height: 4rem;
 }
 
 `

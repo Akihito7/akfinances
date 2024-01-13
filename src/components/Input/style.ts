@@ -9,6 +9,7 @@ background-color: "transparent";
 
 @media screen and (min-width: 486px) and (max-width: 786px){
   width: 40rem;
+  
 }
 
 

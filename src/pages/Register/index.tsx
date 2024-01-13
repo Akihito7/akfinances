@@ -93,7 +93,6 @@ export function Register() {
                             alt="botão de logout"
                         />
                     </Button>
-
                 </ContainerHeader>
                 <ExtendedArea>
                     <ContainerForm>
