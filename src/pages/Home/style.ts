@@ -21,6 +21,7 @@ overflow: hidden;
  display: flex;
  flex-direction: column;
  align-items: center;
+ overflow: hidden;
 
 }
 `
@@ -137,6 +138,7 @@ display: none;
 
   align-items: center;
   width: 30rem;
+  margin-top: 3rem;
  
 }
 
