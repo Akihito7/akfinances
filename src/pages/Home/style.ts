@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
+import Avatar from 'react-avatar';
+
+
 
 export const Container = styled.div`
 
@@ -171,17 +174,36 @@ export const ContainerImage = styled.div`
 display: flex;
 gap: 20px;
 `
+
+export const ContentImage = styled.div`
+position: relative;
+
+`
+
+
 export const ContainerTextImage = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: flex-end;
 `
-export const Image = styled.img`
-
-width: 6rem;
-height: 6rem;
+export const Image = styled(Avatar)`
+size: 2rem;
 object-fit: cover;
 border-radius: 10px;
+position: relative;
+`
+
+export const InputImage = styled.input`
+
+width: 2rem;
+height: 2rem;
+background-color: red;
+position: absolute;
+
+right: 0;
+bottom: 0;
+border: none;
+
 `
 export const ContainerCards = styled.div`
 

@@ -14,6 +14,8 @@ import {
     TransactionList,
     ContainerTransactions,
     Image,
+    ContentImage,
+    InputImage,
     ButtonLogout,
     ImageLogout,
     OlaText,
@@ -45,9 +47,9 @@ export function Home() {
     };
 
     const settingsTransactions = {
-        infinite: true,
+        infinite: false,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 2,
         slidesToScroll: 1,
         variableHeight: true,
         arrows: false,
@@ -72,8 +74,6 @@ export function Home() {
     const [shouldRenderSlider, setShouldRenderSlider] = useState(
         window.innerWidth <= 787
     );
-
-
 
     const [LastTransaction, setLastTransaction] = useState({
         entriesTotal: "Nenhuma entrada ainda",
@@ -160,6 +160,26 @@ export function Home() {
         })
     };
 
+    async function handleFileChange(event){
+        const image = event.target.files[0]
+
+        try {
+            const formData = new FormData();
+            formData.append("avatar", image);
+
+            await api.patch("/user/avatar", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            alert("deu bom")
+        } catch (error) {
+            alert("deu ruim")
+        }
+        
+    }
+
     useEffect(() => {
         getTransactions();
     }, [])
@@ -184,10 +204,13 @@ export function Home() {
             <Header>
                 <ContainerHeader>
                     <ContainerImage>
-                        <Image
-                            src="xama.png"
-                            alt="imagem de perfil"
-                        />
+                        <ContentImage>
+                            <Image
+                               name={user.name}
+                               size="60"
+                            />
+                        
+                        </ContentImage>
                         <ContainerTextImage>
                             <OlaText>Olá</OlaText>
                             <NameText>{user.name}</NameText>
@@ -271,15 +294,15 @@ export function Home() {
                     <ContainerSliderTransactions>
                         <Slider {...settingsTransactions}>
                             {
-                            transactions &&
+                                transactions &&
 
-                            transactions.map((transaction, index) => (
-                                <TransactionCard
-                                    key={index}
-                                    transaction={transaction}
-                                />
-                            )).reverse()
-                        }
+                                transactions.map((transaction, index) => (
+                                    <TransactionCard
+                                        key={index}
+                                        transaction={transaction}
+                                    />
+                                )).reverse()
+                            }
                         </Slider>
 
                     </ContainerSliderTransactions>

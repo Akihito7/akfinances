@@ -19,6 +19,7 @@ type UserProps = {
     id: string,
     email: string;
     name: string;
+    imagem:string;
 }
 
 type SignlnProps = {
