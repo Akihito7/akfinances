@@ -45,9 +45,9 @@ export function Home() {
     };
 
     const settingsTransactions = {
-        infinite: false,
+        infinite: true,
         speed: 500,
-        slidesToShow: 2,
+        slidesToShow: 3,
         slidesToScroll: 1,
         variableHeight: true,
         arrows: false,
@@ -278,7 +278,7 @@ export function Home() {
                                     key={index}
                                     transaction={transaction}
                                 />
-                            ))
+                            )).reverse()
                         }
                         </Slider>
 
@@ -297,7 +297,7 @@ export function Home() {
                                     key={index}
                                     transaction={transaction}
                                 />
-                            ))
+                            )).reverse()
                         }
                     </ContainerTransactions>
             }

@@ -61,7 +61,7 @@ justify-content: space-between;
 
 export const Title = styled.h1<TypeProps>`
 font-family: 'Poppins', sans-serif;
-font-size: 2rem;
+font-size: 1.8rem;
 font-weight: 400;
 color : ${({ type }) => (type === 'total' ? theme.colors.white[100] : theme.colors.blue[100])};
 
@@ -74,13 +74,13 @@ font-size: 1.6rem;
 
 export const Icon = styled.img`
 
-width: 40px;
-height: 40px;
+width: 4rem;
+height: 4rem;
 
 @media screen and (max-width: 485px){
 
-width: 30px;
-height: 30px;
+width: 3rem;
+height: 3rem;
 
 }
 `
@@ -91,7 +91,7 @@ flex-direction: column;
 `
 export const Span = styled.span<TypeProps>`
 font-family: 'Poppins', sans-serif;
-font-size: 3rem;
+font-size: 2.6rem;
 font-weight: 400;
 
 color : ${({ type }) => (type === 'total' ? theme.colors.white[100] : theme.colors.blue[100])};
@@ -104,7 +104,7 @@ font-size: 2rem;
 
 export const Amount = styled.h1<TypeProps>`
 font-family: 'Poppins', sans-serif;
-font-size: 3rem;
+font-size: 2.6rem;
 font-weight: 600;
 color : ${({ type }) => (type === 'total' ? theme.colors.white[100] : theme.colors.blue[100])};
 line-height: 1;
@@ -123,6 +123,6 @@ color : ${({ type }) => (type === 'total' ? theme.colors.white[100] : theme.colo
 line-height: 1;
 
 @media screen and (max-width: 485px){
-font-size: .6rem;
+font-size: 1rem;
 }
 `

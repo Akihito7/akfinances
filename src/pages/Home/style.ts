@@ -115,16 +115,26 @@ padding-bottom: 3rem;
 }
 `
 export const ContainerSliderTransactions = styled.div`
-display: flex;
-flex-direction: column;
-
-align-items: center;
-height: 40rem;
-width: 30rem;
+display: none;
 
 @media screen and (min-width: 486px) and (max-width: 786px) {
+
+  display: flex;
+ flex-direction: column;
+
+  align-items: center;
   width: 40rem;
 
+}
+
+@media screen and (max-width: 485px){
+ 
+  display: flex;
+ flex-direction: column;
+
+  align-items: center;
+  width: 30rem;
+ 
 }
 
 

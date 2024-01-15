@@ -32,7 +32,7 @@ transition: all 300ms;
 
 @media screen and (max-width: 485px){
   width: auto;
-  height: 11rem;
+  height: 10rem;
   margin-bottom: 5px;
 
   &:hover{
@@ -54,7 +54,7 @@ color: ${theme.colors.blue[100]};
 `
 export const Amount = styled.h1<AmountProps>`
 flex: 1;
-font-size: 2.2rem;
+font-size: 2rem;
 font-family: 'Poppins', sans-serif;
 font-weight: 400;
 color : ${({ type }) => (
