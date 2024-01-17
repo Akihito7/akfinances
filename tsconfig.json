@@ -7,8 +7,6 @@
     "skipLibCheck": true,
     "noImplicitAny": false,
     "noEmitOnError": false,
-    "noStrictGenericChecks": true,
-    "ignoreDeprecations": ["5.0"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
