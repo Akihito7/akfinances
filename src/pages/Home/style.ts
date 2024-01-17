@@ -41,7 +41,7 @@ overflow: visible;
 @media screen and (max-width: 485px){
  
  padding: 4rem 0;
- height: 30vh;
+ height: 25vh;
 
 }
 `
@@ -50,6 +50,7 @@ flex: 1;
 display: flex;
 justify-content: center;
 padding: .5rem 5rem;
+
 `;
 export const TransactionList = styled.p`
 margin-top: 10rem;
@@ -67,6 +68,7 @@ color: ${theme.colors.blue[100]};
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  position: relative;
 }
 
 @media screen and (max-width: 485px){
@@ -74,6 +76,7 @@ color: ${theme.colors.blue[100]};
   padding: 0 2rem;
   font-size: 1.6rem;
   font-weight: bold;
+  position: relative;
 }
 `
 export const ContainerTransactions = styled.div`
@@ -124,24 +127,35 @@ display: none;
 @media screen and (min-width: 486px) and (max-width: 786px) {
 
   display: flex;
- flex-direction: column;
+   flex-direction: column;
 
   align-items: center;
   width: 40rem;
+  &::-webkit-scrollbar {
+    height: 1.5rem;
+    display: none;
+  }
 
 }
 
 @media screen and (max-width: 485px){
  
   display: flex;
- flex-direction: column;
+  flex-direction: column;
 
   align-items: center;
-  width: 30rem;
+  width: 34rem;
   margin-top: 3rem;
+  height: 50vh;
+  overflow: auto;
+  padding: 0 2rem;
  
 }
 
+&::-webkit-scrollbar {
+    height: 1.5rem;
+    display: none;
+  }
 
 `
 export const ContainerHeader = styled.div`
@@ -155,20 +169,25 @@ justify-content: space-between;
   width: 100vw;
   padding: 0 2rem;
 
+
 }
 `
 export const ContainerSlider = styled.div`
 
 width: 41rem;
 
+
 @media screen and (min-width: 486px) and (max-width: 786px) {
     width: 40rem;
     height: 10rem;
+    position: absolute;
+    top: 20%;
 
 }
 
 @media screen and (max-width: 485px){
     width: 31rem;
+    position: absolute;
 }
 
 `

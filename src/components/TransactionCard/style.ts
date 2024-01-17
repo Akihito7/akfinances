@@ -31,7 +31,7 @@ transition: all 300ms;
 }
 
 @media screen and (max-width: 485px){
-  width: auto;
+  width: 100%;
   height: 10rem;
   margin-bottom: 5px;
 

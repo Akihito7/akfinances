@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React ,{ useEffect, useState } from "react"
 import { HighlightCard } from "../../components/HighlightCard"
 import { Menu } from "../../components/Menu"
 import { TransactionCard } from "../../components/TransactionCard"
@@ -31,6 +31,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+type PropsTransaction = {
+    name : string;
+    value : string;
+    type : string;
+    date : string;
+    category : string;
+}
 export function Home() {
 
     const handleResize = () => {
@@ -59,7 +66,7 @@ export function Home() {
     };
 
 
-    const [transactions, setTransactions] = useState([]);
+    const [transactions, setTransactions] = useState<[PropsTransaction]>([]);
     const [HighLightAmount, setHighLightAmount] = useState({
         entriesTotal: {
             amount: '0'
@@ -292,7 +299,7 @@ export function Home() {
                 shouldRenderSlider ?
 
                     <ContainerSliderTransactions>
-                        <Slider {...settingsTransactions}>
+                        
                             {
                                 transactions &&
 
@@ -303,7 +310,7 @@ export function Home() {
                                     />
                                 )).reverse()
                             }
-                        </Slider>
+                       
 
                     </ContainerSliderTransactions>
 

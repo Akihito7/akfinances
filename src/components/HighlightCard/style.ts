@@ -43,7 +43,7 @@ transition: all 300ms;
 @media screen and (max-width: 485px){
 margin-right: 10px;
 width: 24rem;
-height: 12rem;
+height: 15vh;
 
 &:hover {
     transform: scale(1);

@@ -26,7 +26,7 @@ justify-content: space-around;
 
 @media screen and (min-width: 486px) and (max-width: 786px) {
 width: 100vw;
-  top : 0;
+  top : 100%;
   left: 0;
   transform: translateX(0);
 }
