@@ -31,13 +31,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-type PropsTransaction = {
-    name : string;
-    value : string;
-    type : string;
-    date : string;
-    category : string;
-}
+
 export function Home() {
 
     const handleResize = () => {
@@ -66,7 +60,7 @@ export function Home() {
     };
 
 
-    const [transactions, setTransactions] = useState<[PropsTransaction]>([]);
+    const [transactions, setTransactions] = useState([]);
     const [HighLightAmount, setHighLightAmount] = useState({
         entriesTotal: {
             amount: '0'
