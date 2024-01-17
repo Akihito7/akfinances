@@ -29,7 +29,10 @@ import { Controller, useForm } from "react-hook-form"
 import { api } from '../../axios';
 import { useAuth } from '../../Contexts/AuthContext';
 
-
+type PropsTransaction = {
+    name : string,
+    price : string,
+}
 export function Register() {
 
     const [categoryOpen, setCategoryOpen] = useState(false);
@@ -45,7 +48,7 @@ export function Register() {
         else setCategoryOpen(true)
     };
 
-    async function handleRegisterTransaction(transaction: {}) {
+    async function handleRegisterTransaction(transaction: PropsTransaction) {
 
         const today = new Date();
         const day = String(today.getDate()).padStart(2, "0");
