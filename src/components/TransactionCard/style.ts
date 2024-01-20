@@ -46,6 +46,7 @@ font-size: 1.6rem;
 font-family: 'Poppins', sans-serif;
 font-weight: 500;
 color: ${theme.colors.blue[100]};
+text-transform: capitalize;
 
 @media screen and (max-width: 485px){
   font-size: 1.4rem;

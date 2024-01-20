@@ -18,7 +18,7 @@ type UserProps = {
     id: string,
     email: string;
     name: string;
-    imagem:string;
+    imagem: string;
 }
 
 type SignlnProps = {
@@ -37,7 +37,7 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
 
     const [user, setUser] = useState({} as UserProps);
     const [token, setToken] = useState(null);
-    
+
 
     const nameAsyncStorage = "@akfinances/user"
 
@@ -69,6 +69,11 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
                 password: userInfo.password
             })
 
+            signln({
+                email: userInfo.email,
+                password: userInfo.password
+            })
+
         } catch (error) {
             console.log(error)
         }
@@ -78,7 +83,7 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
         setUser({} as UserProps);
         setToken(null);
         localStorage.removeItem(nameAsyncStorage);
-        
+
     };
 
     async function tryLoginWithAsyncStorage() {

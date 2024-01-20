@@ -272,6 +272,7 @@ font-size: 2em;
 font-weight: 700;
 color: ${theme.colors.white[100]};
 line-height: 1;
+text-transform: capitalize;
 
 @media screen and (max-width: 485px){
     font-size: 1.4rem;

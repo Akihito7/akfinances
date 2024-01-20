@@ -157,8 +157,9 @@ export function Resume() {
                 <ContainerHeader>
                     <ContainerImage>
                         <Image
-                            src='xama.png'
+                            name={user.name}
                             alt='foto de perfil'
+                            size="60"
                         />
 
                         <ContainerTextImage>

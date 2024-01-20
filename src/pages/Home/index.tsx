@@ -140,12 +140,12 @@ export function Home() {
         const lastTransactionTotal = `01 a ${dayTotal} de ${monthNameTotal}`
 
         const monthNameLastEntries = new Date(0, Number(monthLastEntries) - 1).toLocaleString('default', { month: 'long' });
-
+       
         const monthNameLastExpensive = new Date(0, Number(monthLastExpensive) - 1).toLocaleString('default', { month: 'long' });
 
-        const lastEntriesTotalFormatted = `Ultima entrada em ${dayLastEntries} de ${monthNameLastEntries}`
+        const lastEntriesTotalFormatted = lastEntriesTotal ? `Ultima entrada em ${dayLastEntries} de ${monthNameLastEntries}` : "Nenhuma entrada ainda"
 
-        const lastExpensiveTotalFormatted = `Ultima saida em ${dayLastExpensive} de ${monthNameLastExpensive}`
+        const lastExpensiveTotalFormatted =  lastExpensiveTotal ? `Ultima saida em ${dayLastExpensive} de ${monthNameLastExpensive}` : "Nenhuma saída ainda"
 
         setLastTransaction({
             entriesTotal: lastEntriesTotalFormatted,
@@ -208,6 +208,7 @@ export function Home() {
                         <ContentImage>
                             <Image
                                name={user.name}
+                               alt='foto de perfil'
                                size="60"
                             />
                         

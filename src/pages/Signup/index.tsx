@@ -51,6 +51,7 @@ export function Signup() {
             email: '',
             password: '',
         });
+        navigate("/")
     }
 
     return (

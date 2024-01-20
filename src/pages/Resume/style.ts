@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
+import Avatar from 'react-avatar';
 
 type PropsCategory = {
     "category": string;
@@ -73,12 +74,11 @@ flex-direction: column;
 justify-content: flex-end;
 
 `
-export const Image = styled.img`
-
-width: 6rem;
-height: 6rem;
+export const Image = styled(Avatar)`
+size: 2rem;
 object-fit: cover;
 border-radius: 10px;
+position: relative;
 `
 export const OlaText = styled.p`
 
@@ -95,6 +95,7 @@ font-size: 2em;
 font-weight: 700;
 color: ${theme.colors.white[100]};
 line-height: 1;
+text-transform: capitalize;
 
 `
 export const ImageLogout = styled.img`
