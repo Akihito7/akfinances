@@ -10,6 +10,7 @@ height: 100vh;
 width: 100vw;
 background-color: ${theme.colors.white[200]};
 overflow: hidden;
+position: relative;
 
 @media screen and (min-width: 486px) and (max-width: 786px) {
  display: flex;
@@ -22,6 +23,7 @@ overflow: hidden;
  flex-direction: column;
  align-items: center;
  overflow: hidden;
+
 
 }
 `
@@ -145,11 +147,10 @@ display: none;
 
   align-items: center;
   width: 34rem;
-  margin-top: 3rem;
   height: 50vh;
   overflow: auto;
   padding: 0 2rem;
- 
+ margin-bottom: 5rem;
 }
 
 &::-webkit-scrollbar {

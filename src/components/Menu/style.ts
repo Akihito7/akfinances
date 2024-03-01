@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { theme } from "../../theme";
 
 type PropsSelected = {
-    selected : boolean;
+  selected: boolean;
 };
 
 
@@ -11,7 +11,7 @@ export const Container = styled.div`
 width: 52.1rem;
 height: 5rem;
 border-radius: 10px;
-padding: 0 4rem;
+
 
 background-color: ${theme.colors.white[100]};
 
@@ -24,20 +24,21 @@ display: flex;
 align-items: center;
 justify-content: space-around;
 
+
 @media screen and (min-width: 486px) and (max-width: 786px) {
 width: 100vw;
-  top : 100%;
+top: auto;
   left: 0;
   transform: translateX(0);
 }
+border-radius: 0;
 
 
 @media screen and (max-width: 485px){
-  width: 100vw;
-  top : 100%;
-  left: 0;
-  transform: translateX(0);
-
+  max-width: 100vw;
+  bottom: 0;
+  top: auto;
+ border-radius: 0;
 }
 `
 export const ContainerIcon = styled.div`

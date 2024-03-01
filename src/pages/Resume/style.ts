@@ -14,6 +14,7 @@ height: 100vh;
 display: flex;
 flex-direction: column;
 background-color: ${theme.colors.white[200]};
+position: relative;
 
 @media screen and (max-width: 485px){
     
@@ -282,17 +283,16 @@ font-size: 2rem;
 color: ${theme.colors.blue[100]};
 align-self: center;
 position: absolute;
-right: 40%;
+left: 50%;
+translate: -50%;
 bottom: 40%;
 
 @media screen and (min-width: 486px) and (max-width: 786px){
-    right: 33%;
     font-weight: bold;
     font-size: 1.6rem;
 }
 
 @media screen and (max-width: 485px){   
-    right: 26%;
     font-weight: bold;
     font-size: 1.6rem;
 }
