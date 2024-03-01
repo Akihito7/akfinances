@@ -12,6 +12,7 @@ width: 100vw;
 height: 100vh;
 background-color: ${theme.colors.white[200]};
 overflow-x: hidden;
+position: relative;
 
 .hidden {
     display: none;
@@ -95,8 +96,15 @@ flex: 1;
 display: flex;
 justify-content: center;
 padding: .5rem 5rem;
-margin-top: 7rem;
+margin-top: 1rem;
 
+@media screen and (min-width: 486px) and (max-width: 786px) {
+ margin-top: 7rem;
+}
+
+@media screen and (max-width: 485px){
+    margin-top: 7rem;
+}   
 `
 export const ContainerForm = styled.div`
 

@@ -28,10 +28,11 @@ import { categories } from '../../utils/categories';
 import { Controller, useForm } from "react-hook-form"
 import { api } from '../../axios';
 import { useAuth } from '../../Contexts/AuthContext';
+import { Menu } from '../../components/Menu';
 
 type PropsTransaction = {
-    name : string,
-    price : string,
+    name: string,
+    price: string,
 }
 export function Register() {
 
@@ -79,24 +80,6 @@ export function Register() {
     return (
         <Container>
             <Header>
-                <ContainerHeader>
-                    <Button onClick={() => navigate(-1)}>
-                        <Image
-                            src="arrowLeft.svg"
-                            alt="botão de voltar"
-                        />
-                    </Button>
-
-                    <Button onClick={() => {
-                        logout()
-                        navigate("/")
-                    }}>
-                        <Image
-                            src="power.svg"
-                            alt="botão de logout"
-                        />
-                    </Button>
-                </ContainerHeader>
                 <ExtendedArea>
                     <ContainerForm>
                         <Title>Cadastro</Title>
@@ -189,6 +172,12 @@ export function Register() {
 
                 </ExtendedArea>
             </Header>
+            {
+
+                
+            }
+            <Menu screenSelected='register' />
+
         </Container>
     )
 }

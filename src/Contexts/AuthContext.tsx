@@ -56,7 +56,7 @@ function AuthContextProvider({ children }: AuthContextProviderProps) {
 
 
         } catch (error) {
-            console.log(error)
+            alert("Email ou senha inválidos")
         }
 
     };

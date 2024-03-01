@@ -15,8 +15,8 @@ border-radius: 10px;
 
 background-color: ${theme.colors.white[100]};
 
-position: absolute;
-top : 88%;
+position: fixed;
+top : 90%;
 left: 50%;
 transform: translateX(-50%);
 
@@ -30,8 +30,10 @@ width: 100vw;
 top: auto;
   left: 0;
   transform: translateX(0);
+  border-radius: 0;
+  bottom: 0;
 }
-border-radius: 0;
+
 
 
 @media screen and (max-width: 485px){
