@@ -86,7 +86,7 @@ export function Home() {
 
     async function getTransactions() {
         try {
-            const response = await api.get(`/transaction/bymonth/${new Date().toISOString()}`);
+            const response = await api.get(`/transaction/${user.id}`);
             setTransactions(response.data);
 
         } catch (error) {
