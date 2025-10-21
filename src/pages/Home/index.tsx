@@ -29,6 +29,7 @@ import { appError } from "../../utils/appError";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useFetch } from "../../hooks/use-fetch";
 
 export function Home() {
   const handleResize = () => {
@@ -43,8 +44,6 @@ export function Home() {
     variableWidth: true,
     arrows: false,
   };
-
-  const [transactions, setTransactions] = useState([]);
   const [HighLightAmount, setHighLightAmount] = useState({
     entriesTotal: {
       amount: "0",
@@ -66,33 +65,30 @@ export function Home() {
     total: "Nenhuma transação ainda",
   });
 
+  const { user, logout } = useAuth();
+
+  const { data, error, isLoading } = useFetch<any[]>({
+    url: `/transaction/${user.id}`,
+    refetchDependecies: [user.id],
+  });
+
   const transactionsCards = useMemo(() => {
-    return (
-      transactions &&
-      transactions
+    return error ? (
+      <>
+        <span>Error : {error.message}</span>
+      </>
+    ) : isLoading ? (
+      <span>Loading...</span>
+    ) : !data || data?.length === 0 ? (
+      <span>sem Items</span>
+    ) : (
+      data
         .map((transaction, index) => (
           <TransactionCard key={index} transaction={transaction} />
         ))
         .reverse()
     );
-  }, [transactions]);
-
-  const { user, logout } = useAuth();
-
-  async function getTransactions() {
-    try {
-      const response = await api.get(`/transaction/${user.id}`);
-      setTransactions(response.data);
-    } catch (error) {
-      console.log(error);
-
-      if (error instanceof appError) {
-        return alert(error.message);
-      }
-
-      return alert("Erro interno!");
-    }
-  }
+  }, [data]);
 
   function setHighlightCardsAmount() {
     let entriesTotal = 0;
@@ -103,7 +99,7 @@ export function Home() {
     let TOTALOFENTRIES = "";
     let TOTALOFEXPENSIVE = "";
 
-    transactions.map((transaction) => {
+    data.map((transaction) => {
       if (transaction.type === "income") {
         entriesTotal = entriesTotal + Number(transaction.value);
         lastEntriesTotal = transaction.date;
@@ -170,14 +166,10 @@ export function Home() {
   }
 
   useEffect(() => {
-    getTransactions();
-  }, []);
-
-  useEffect(() => {
-    if (transactions.length > 0) {
+    if (data?.length > 0) {
       setHighlightCardsAmount();
     }
-  }, [transactions]);
+  }, [data]);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -263,8 +255,8 @@ export function Home() {
 
       {shouldRenderSlider ? (
         <ContainerSliderTransactions>
-          {transactions &&
-            transactions
+          {data &&
+            data
               .map((transaction, index) => (
                 <TransactionCard key={index} transaction={transaction} />
               ))
