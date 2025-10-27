@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { HighlightCard } from "../../components/HighlightCard";
 import { Menu } from "../../components/Menu";
 import { TransactionCard } from "../../components/TransactionCard";
@@ -15,21 +15,20 @@ import {
   ContainerTransactions,
   Image,
   ContentImage,
-  InputImage,
   ButtonLogout,
   ImageLogout,
   OlaText,
   NameText,
 } from "./style";
 
-import { api } from "../../axios";
 import { useAuth } from "../../Contexts/AuthContext";
-import { appError } from "../../utils/appError";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useFetch } from "../../hooks/use-fetch";
+import { format, isAfter, parse } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export function Home() {
   const handleResize = () => {
@@ -91,77 +90,89 @@ export function Home() {
   }, [data]);
 
   function setHighlightCardsAmount() {
-    let entriesTotal = 0;
-    let expensiveTotal = 0;
-    let lastEntriesTotal = "";
-    let lastExpensiveTotal = "";
+    let entriesAmountTotal = 0;
+    let expensiveAmountTotal = 0;
+    let lastDateEntriesTotal = "";
+    let lastDateExpensiveTotal = "";
 
-    let TOTALOFENTRIES = "";
-    let TOTALOFEXPENSIVE = "";
-
-    data.map((transaction) => {
+    data.forEach((transaction) => {
       if (transaction.type === "income") {
-        entriesTotal = entriesTotal + Number(transaction.value);
-        lastEntriesTotal = transaction.date;
-        TOTALOFENTRIES = transaction.date;
+        entriesAmountTotal += Number(transaction.value);
+        lastDateEntriesTotal = transaction.date;
       } else {
-        expensiveTotal = expensiveTotal + Number(transaction.value);
-        lastExpensiveTotal = transaction.date;
-        TOTALOFEXPENSIVE = transaction.date;
+        expensiveAmountTotal += Number(transaction.value);
+        lastDateExpensiveTotal = transaction.date;
       }
     });
 
-    const [dayLastEntries, monthLastEntries] = lastEntriesTotal.split("/");
-    const [dayLastExpensive, monthLastExpensive] =
-      lastExpensiveTotal.split("/");
+    
 
-    const LASTTRANSACTIONOFENTRIES = Number(TOTALOFENTRIES.split("/").join(""));
-    const LASTTRANSACTIONOFEXPENSIVE = Number(
-      TOTALOFEXPENSIVE.split("/").join("")
-    );
-
-    const LastTransactionOfTotal =
-      LASTTRANSACTIONOFENTRIES > LASTTRANSACTIONOFEXPENSIVE
-        ? LASTTRANSACTIONOFENTRIES
-        : LASTTRANSACTIONOFEXPENSIVE;
-
-    const dayTotal = String(LastTransactionOfTotal).substring(0, 2);
-    const monthTotal = String(LastTransactionOfTotal).substring(2, 4);
-    const monthNameTotal = new Date(0, Number(monthTotal) - 1).toLocaleString(
-      "default",
-      { month: "long" }
-    );
-
-    const lastTransactionTotal = `01 a ${dayTotal} de ${monthNameTotal}`;
-
-    const monthNameLastEntries = new Date(
-      0,
-      Number(monthLastEntries) - 1
-    ).toLocaleString("default", { month: "long" });
-
-    const monthNameLastExpensive = new Date(
-      0,
-      Number(monthLastExpensive) - 1
-    ).toLocaleString("default", { month: "long" });
-
-    const lastEntriesTotalFormatted = lastEntriesTotal
-      ? `Ultima entrada em ${dayLastEntries} de ${monthNameLastEntries}`
-      : "Nenhuma entrada ainda";
-
-    const lastExpensiveTotalFormatted = lastExpensiveTotal
-      ? `Ultima saida em ${dayLastExpensive} de ${monthNameLastExpensive}`
-      : "Nenhuma saída ainda";
-
-    setLastTransaction({
-      entriesTotal: lastEntriesTotalFormatted,
-      expensiveTotal: lastExpensiveTotalFormatted,
-      total: lastTransactionTotal,
+    handleLastTransactionCards({
+      lastDateEntriesTotal,
+      lastDateExpensiveTotal,
     });
 
     setHighLightAmount({
-      entriesTotal: { amount: String(entriesTotal) },
-      expensiveTotal: { amount: String(expensiveTotal) },
-      total: { amount: String(entriesTotal - expensiveTotal) },
+      entriesTotal: { amount: String(entriesAmountTotal) },
+      expensiveTotal: { amount: String(expensiveAmountTotal) },
+      total: { amount: String(entriesAmountTotal - expensiveAmountTotal) },
+    });
+  }
+
+  function handleLastTransactionCards({
+    lastDateEntriesTotal,
+    lastDateExpensiveTotal,
+  }: {
+    lastDateEntriesTotal: string;
+    lastDateExpensiveTotal: string;
+  }) {
+    const dateLastEntriesParsed = parse(
+      lastDateEntriesTotal,
+      "dd/MM/yyyy",
+      new Date()
+    );
+    const dataLastExpensiveParsed = parse(
+      lastDateExpensiveTotal,
+      "dd/MM/yyyy",
+      new Date()
+    );
+
+    const LastDateTransactionOfTotal = isAfter(
+      dateLastEntriesParsed,
+      dataLastExpensiveParsed
+    )
+      ? dateLastEntriesParsed
+      : dataLastExpensiveParsed;
+
+    const dayTotal = format(LastDateTransactionOfTotal, "dd");
+    const monthNameTotal = format(LastDateTransactionOfTotal, "MMMM", {
+      locale: ptBR,
+    });
+
+    const lastTransactionTotalPhrase = `01 a ${dayTotal} de ${monthNameTotal}`;
+
+    const dayNameLastEntries = format(dateLastEntriesParsed, "dd");
+    const monthNameLastEntries = format(dateLastEntriesParsed, "MMMM", {
+      locale: ptBR,
+    });
+
+    const dayNameLastExpensive = format(dataLastExpensiveParsed, "dd");
+    const monthNameLastExpensive = format(dataLastExpensiveParsed, "MMMM", {
+      locale: ptBR,
+    });
+
+    const lastDateEntriesTotalPhrase = lastDateEntriesTotal
+      ? `Ultima entrada em ${dayNameLastEntries} de ${monthNameLastEntries}`
+      : "Nenhuma entrada ainda";
+
+    const lastDateExpensiveTotalPhrase = lastDateExpensiveTotal
+      ? `Ultima saida em ${dayNameLastExpensive} de ${monthNameLastExpensive}`
+      : "Nenhuma saída ainda";
+
+    setLastTransaction({
+      entriesTotal: lastDateEntriesTotalPhrase,
+      expensiveTotal: lastDateExpensiveTotalPhrase,
+      total: lastTransactionTotalPhrase,
     });
   }
 
