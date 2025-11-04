@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   Container,
@@ -23,12 +23,18 @@ import { useNavigate } from "react-router-dom";
 import { categories } from "../../utils/categories";
 
 import { Controller, useForm } from "react-hook-form";
-import { api } from "../../axios";
 import { useAuth } from "../../Contexts/AuthContext";
 import { Menu } from "../../components/Menu";
 import { format } from "date-fns";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  CreateTransactionCommand,
+  CreateTransactionCommandProps,
+  CreateTransactionHandler,
+} from "./commands/create-transacation.command";
+import { toast } from "sonner";
+import { ToasterWithActions } from "../../components/Toaster/ToasterWithAction";
 
 const TransactionSchema = yup.object({
   name: yup.string().required(),
@@ -68,14 +74,42 @@ export function Register() {
     transaction: TransactionSchemaProps,
     date: string
   ) {
-    await api.post("/transaction/", {
+    const propsCreateTransactionCommand: CreateTransactionCommandProps = {
       name: transaction.name,
       value: transaction.price,
       category: categorySelected,
       type: typeTransaction,
       date,
       user_id: user.id,
-    });
+    };
+
+    const createTransactionCommand = new CreateTransactionCommand(
+      propsCreateTransactionCommand
+    );
+
+    const createTransactionHandler = new CreateTransactionHandler();
+
+    const toastId = toast(
+      <ToasterWithActions
+        title="Transação criada"
+        description="Desfazer em até 3 segundos."
+        actionLabel="Desfazer"
+        duration={3000}
+        onAction={() => {
+          resetFormFields();
+          navigate("/");
+          toast.dismiss(toastId);
+        }}
+        onFinishToast={async () => {
+          if (!createTransactionHandler || !createTransactionCommand) return;
+          await createTransactionHandler.handle(createTransactionCommand);
+          toast.dismiss(toastId);
+          resetFormFields();
+          navigate("/");
+        }}
+      />,
+      { duration: 3000 }
+    );
   }
 
   function resetFormFields() {
@@ -93,16 +127,10 @@ export function Register() {
     const dateFormatted = format(new Date(), "dd/MM/yyyy");
     try {
       await createTransaction(transaction, dateFormatted);
-      resetFormFields();
-      navigate("/");
     } catch (error) {
       console.log(error);
     }
   }
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <Container>
@@ -192,7 +220,6 @@ export function Register() {
           </ContainerForm>
         </ExtendedArea>
       </Header>
-      {}
       <Menu screenSelected="register" />
     </Container>
   );
